@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 set -e
-cd tp-final
+#cd tp-final
 ant
