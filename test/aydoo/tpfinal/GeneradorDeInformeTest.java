@@ -37,11 +37,9 @@ public class GeneradorDeInformeTest {
 		@Test
 		public void comprobarQueFueGeneradoUnArchivoDeSalida() {
 			String path="entradas_tests/temporal/recorrido-2012a.csv";
-<<<<<<< HEAD
+
 			String pathDeSalida="salidas/pruebas/GeneradorDeInforme/";
-=======
-			String pathDeSalida="salidas/pruebas/YML/GeneradorDeInforme/";
->>>>>>> aa0fc52419407c796fae69c8feb3a954f3ef29e8
+
 			BuscadorDeArchivos ba=new BuscadorDeArchivos(path,"csv");
 			int contadorDeArchivos=0;
 		GeneradorDeInforme gdi=new GeneradorDeInforme(ba.getListaArchivosEnDirectorio(),pathDeSalida,contadorDeArchivos);
@@ -60,14 +58,10 @@ public class GeneradorDeInformeTest {
 		for(String pathYml: listadodeArchivos)
 			pathDeArchivoYmlEncontado=pathYml;
 			Assert.assertEquals(listadodeArchivos.size(),1,0);
-<<<<<<< HEAD
-			//Assert.assertEquals(pathDeArchivoYmlEncontado.substring(pathDeArchivoYmlEncontado.length()-11),"Salida0.yml");
+            Assert.assertEquals(pathDeArchivoYmlEncontado.substring(pathDeArchivoYmlEncontado.length()-11),"Salida0.yml");
 
-			
-=======
-			Assert.assertEquals(pathDeArchivoYmlEncontado,"salidas\\pruebas\\YML\\GeneradorDeInforme\\Salida0.yml");
 	
->>>>>>> aa0fc52419407c796fae69c8feb3a954f3ef29e8
+
 		}
 
 
