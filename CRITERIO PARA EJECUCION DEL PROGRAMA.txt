@@ -1,0 +1,15 @@
+Forma de Ejecucion:
+
+Hay que correr el el main que esta en la clase MainPedidoDeParametros,
+ingresando por teclado las ruta en el formato de ejemplo:
+C:/temporal
+C:/carpetaDeArchivos
+Etc.
+
+Le solicitara ingresar el path onDemand y Daemon para que pueda probar su funcionamiento.
+
+De no respetarse esta normativa de acceso de las rutas, el programa no respondera.
+
+Grupo
+Luna Echechuri (22763)
+Fernandez Gamen (22764)
