@@ -1,3 +1,5 @@
+package aydoo.tpfinal;
+
 public class Bicicleta {
 	private String id;
 
@@ -9,8 +11,17 @@ public class Bicicleta {
 		return id;
 	}
 
-	public boolean estadoCompararBicicletas(Bicicleta bicicleta) {
-		return this.id == bicicleta.getId();
-
+	
+	@Override
+	public boolean equals(Object obj) {
+		Bicicleta bicicleta= (Bicicleta) obj;
+		
+		return this.id.equals(bicicleta.getId());
 	}
+	@Override
+	public int hashCode() {
+		return this.id.hashCode();
+	}
+
+	
 }
