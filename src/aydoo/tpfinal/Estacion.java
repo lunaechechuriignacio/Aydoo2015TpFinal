@@ -1,10 +1,10 @@
-import java.util.Date;
+package aydoo.tpfinal;
 
 public class Estacion {
 	private String id;
 	private String nombre;
 
-	Estacion(String nombre, String id) {
+	public Estacion(String nombre, String id) {
 
 		this.nombre = nombre;
 		this.id = id;
@@ -26,5 +26,9 @@ public class Estacion {
 
 	public boolean estadoCompararEstacion(Estacion estacion) {
 		return this.id == estacion.getId();
+	}
+
+	public void setId(String id) {
+		this.id=id;
 	}
 }
