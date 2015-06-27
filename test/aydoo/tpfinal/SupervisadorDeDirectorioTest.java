@@ -11,7 +11,7 @@ public class SupervisadorDeDirectorioTest {
 	public void test() {
 		
 		// ESTE TEST NO LO CORREMOS PORQUE GENERA UN LOOP INFINITO PARA EL SERVICIO QUE MONITOREA EL PATH DE ENTRADA
-		// SEGUN LO ACORDADO, SE DEJA COMENTADO ESTE CÓDIGO, AUNQUE ESTE TEST ESTÁ CORRIENDO SIN PROBLEMAS.
+		// SEGUN LO ACORDADO, SE DEJA COMENTADO ESTE CODIGO, AUNQUE ESTE TEST ESTA CORRIENDO SIN PROBLEMAS.
 		/*String pathDeEntrada="entradas_tests/";
 		
 		ProcesadorEstadisticoDaemon procesadorDaemon= new ProcesadorEstadisticoDaemon(pathDeEntrada);
