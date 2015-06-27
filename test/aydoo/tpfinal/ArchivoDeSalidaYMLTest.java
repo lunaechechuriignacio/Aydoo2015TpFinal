@@ -11,7 +11,7 @@ public class ArchivoDeSalidaYMLTest {
 	@Test
 	public void generoUnArchivsdfsdfsdfsdo() {
 	
-		String  path="salidas/pruebas/ArchivoDeSalidaYML/";
+		String  path="salidas/pruebas/ArchivoDeSalidaYML";
 		ArchivoDeSalidaYML archivoYML = new ArchivoDeSalidaYML("prueba",
 				path);
 		BuscadorDeArchivos ba = new BuscadorDeArchivos(path, "yml");
@@ -40,7 +40,7 @@ public class ArchivoDeSalidaYMLTest {
 		for(String pathYml: listadodeArchivos)
 			pathDeArchivoYmlEncontado=pathYml;
 			Assert.assertEquals(listadodeArchivos.size(),1,0);
-			Assert.assertEquals(pathDeArchivoYmlEncontado,"c:\\temporal\\prueba.yml");
+			Assert.assertEquals(pathDeArchivoYmlEncontado,"salidas\\pruebas\\ArchivoDeSalidaYML\\prueba.yml");
 
 
 	}

@@ -56,7 +56,7 @@ public class GeneradorDeInformeTest {
 		for(String pathYml: listadodeArchivos)
 			pathDeArchivoYmlEncontado=pathYml;
 			Assert.assertEquals(listadodeArchivos.size(),1,0);
-			Assert.assertEquals(pathDeArchivoYmlEncontado,"c:\\temporal\\Salida0.yml");
+			Assert.assertEquals(pathDeArchivoYmlEncontado,"salidas\\pruebas\\Salida0.yml");
 
 			
 		}
