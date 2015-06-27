@@ -1,6 +1,5 @@
 package aydoo.tpfinal;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.junit.Assert;
@@ -11,7 +10,7 @@ public class ArchivoDeSalidaYMLTest {
 	@Test
 	public void generoUnArchivsdfsdfsdfsdo() {
 	
-		String  path="salidas/pruebas/ArchivoDeSalidaYML";
+		String  path="salidas/pruebas/YML/ArchivoSalidaYML/";
 		ArchivoDeSalidaYML archivoYML = new ArchivoDeSalidaYML("prueba",
 				path);
 		BuscadorDeArchivos ba = new BuscadorDeArchivos(path, "yml");
@@ -40,7 +39,11 @@ public class ArchivoDeSalidaYMLTest {
 		for(String pathYml: listadodeArchivos)
 			pathDeArchivoYmlEncontado=pathYml;
 			Assert.assertEquals(listadodeArchivos.size(),1,0);
+<<<<<<< HEAD
 			Assert.assertEquals(pathDeArchivoYmlEncontado.substring(pathDeArchivoYmlEncontado.length()-10),"prueba.yml");
+=======
+			Assert.assertEquals(pathDeArchivoYmlEncontado,"salidas\\pruebas\\YML\\ArchivoSalidaYML\\prueba.yml");
+>>>>>>> aa0fc52419407c796fae69c8feb3a954f3ef29e8
 
 
 	}
