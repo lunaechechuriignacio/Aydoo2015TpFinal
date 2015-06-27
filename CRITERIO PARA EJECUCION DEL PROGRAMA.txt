@@ -10,6 +10,8 @@ Le solicitara ingresar el path onDemand y Daemon para que pueda probar su funcio
 
 De no respetarse esta normativa de acceso de las rutas, el programa no respondera.
 
+Aclaraciones:  Se comento el test que hace el loop al daemon porque hacia fallar Jenkins.
+
 Grupo
-Luna Echechuri (22763)
-Fernandez Gamen (22764)
+Ignacio Luna Echechuri (22763)
+Martin Fernandez Gamen (22764)
