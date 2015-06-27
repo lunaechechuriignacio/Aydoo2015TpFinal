@@ -39,13 +39,8 @@ public class ArchivoDeSalidaYMLTest {
 		for(String pathYml: listadodeArchivos)
 			pathDeArchivoYmlEncontado=pathYml;
 			Assert.assertEquals(listadodeArchivos.size(),1,0);
-<<<<<<< HEAD
+
 			Assert.assertEquals(pathDeArchivoYmlEncontado.substring(pathDeArchivoYmlEncontado.length()-10),"prueba.yml");
-=======
-			Assert.assertEquals(pathDeArchivoYmlEncontado,"salidas\\pruebas\\YML\\ArchivoSalidaYML\\prueba.yml");
->>>>>>> aa0fc52419407c796fae69c8feb3a954f3ef29e8
-
-
 	}
 
 	
