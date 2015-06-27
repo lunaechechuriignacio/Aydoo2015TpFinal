@@ -9,7 +9,7 @@ public class DescomprimidorArchivoZipTest {
 	public void testDescomprimirArchivos() {
 		
 		String archivoEntrada="entradas_tests/recorridos-2010.zip";
-		String carpetaSalida="salidas/pruebas/YML/";
+		String carpetaSalida="salidas/pruebas/CSV/";
 		
 		DescomprimidorArchivosZip daz = new DescomprimidorArchivosZip(archivoEntrada,carpetaSalida);
 		
