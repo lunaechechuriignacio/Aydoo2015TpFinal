@@ -10,6 +10,8 @@ public class Procesador {
 
 		if (args.length > 1)
 			esDemonio = args[1].equals("demonio");
+		else
+			esDemonio=false;
 
 		if (esDemonio) {
 
