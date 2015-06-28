@@ -1,4 +1,4 @@
-package aydoo.tpfinal;
+package aydoo;
 import java.io.IOException;
 import org.junit.Test;
 import org.junit.Assert;

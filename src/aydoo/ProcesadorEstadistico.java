@@ -1,4 +1,4 @@
-package aydoo.tpfinal;
+package aydoo;
 
 public abstract interface  ProcesadorEstadistico {
 	

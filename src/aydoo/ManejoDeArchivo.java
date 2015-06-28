@@ -1,4 +1,4 @@
-package aydoo.tpfinal;
+package aydoo;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

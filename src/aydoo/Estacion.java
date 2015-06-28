@@ -1,4 +1,4 @@
-package aydoo.tpfinal;
+package aydoo;
 
 public class Estacion {
 	private String id;
