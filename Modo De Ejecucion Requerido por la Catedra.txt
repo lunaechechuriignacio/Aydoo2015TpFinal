@@ -1,6 +1,7 @@
 El modo de ejecucion se ajusta 100% a lo solicitado en el mail del 25-06-2015 con asunto: "IMPORTANTE: Especificaciones de ejecución del TP final":
 
-Una vez compilada la aplicacion se ejecuta de la siguiente forma: 
+Una vez compilada la aplicacion se ejecuta de la siguiente forma (Dado que en GitHub no se esta subiendo la carpeta BUILD, habra que compilar el proyecto bajado -Ultima version Release 2.1- desde nuestro repositorio  https://github.com/lunaechechuriignacio/Aydoo2015TpFinal.  
+	Esto generara la carpeta BUILD desde donde se podrá correr el programa): 
 
 Modo demonio
 
