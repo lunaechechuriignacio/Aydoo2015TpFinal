@@ -1,5 +1,5 @@
 package aydoo;
-
+import java.io.File;
 public class Procesador {
 
 	public static void main(String[] args) {
@@ -8,6 +8,10 @@ public class Procesador {
 		ProcesadorEstadistico procesador;
 		String path = args[0];
 		Boolean esDemonio = null;
+		File directorio = new File("salida");
+		if (!directorio.exists()) {
+			directorio.mkdir();
+		}
 
 		if (args.length > 1)
 			esDemonio = args[1].equals("demonio");
