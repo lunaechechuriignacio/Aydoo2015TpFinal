@@ -38,7 +38,7 @@ public class ProcesadorEstadisticoDaemonTest  {
 	    };
 	    
 	    Timer timer = new Timer();
-	    // Dentro de 0 milisegundos avísame cada 1000 milisegundos
+	   
 	    timer.scheduleAtFixedRate(timerTask, 0, 1000);
 		
 		Assert.assertNotNull(timer);
