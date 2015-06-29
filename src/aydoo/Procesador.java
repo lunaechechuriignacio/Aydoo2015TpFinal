@@ -19,12 +19,13 @@ public class Procesador {
 			System.out.println("Ejecutando Modo Daemon");
 
 			procesador = new ProcesadorEstadisticoDaemon(path);
+			procesador.ejecutar();
 
 		} else {
 			System.out.println("Ejecutando Modo On-demand.");
 
 			procesador = new ProcesadorEstadisticoOnDemand(path);
-
+			procesador.ejecutar();
 		}
 	}
 }
