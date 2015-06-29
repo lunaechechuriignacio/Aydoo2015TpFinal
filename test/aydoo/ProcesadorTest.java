@@ -9,6 +9,11 @@ public class ProcesadorTest {
 	public void pruebaMain(){
 
 		Procesador procesadorTestear = new Procesador();
+		String[] cadena={"",""};
+		
+		cadena[0]="entradas_tests/";
+		
+		Procesador.main(cadena);
 		
 		Assert.assertNotNull(procesadorTestear);
 		

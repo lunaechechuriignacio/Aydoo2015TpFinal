@@ -13,8 +13,9 @@ public class ManejoDeArchivosTest {
 		HashMap<Bicicleta, Integer> mapaBicicleta = new HashMap<Bicicleta, Integer>();
 		HashMap<Recorrido, Integer> mapaRecorrido = new HashMap<Recorrido, Integer>();
 		ManejoDeArchivo mda = new ManejoDeArchivo(
-				"entradas_tests/recorridos-2010a.csv", mapaBicicleta,
+				"entradas_tests/recorridos-2010.csv", mapaBicicleta,
 				mapaRecorrido);
+		mda.setPathArchivo("entradas_tests/recorridos-2010a.csv");
 
 		try {
 
