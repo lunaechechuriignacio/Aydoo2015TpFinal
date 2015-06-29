@@ -10,12 +10,11 @@ import org.junit.Test;
 public class ArchivoDeSalidaYMLTest {
 
 	@Test
-	public void generoUnArchivsdfsdfsdfsdo() {
+	public void generoUnArchivoDePrueba() {
 	
 		String  path="salida/";
 		this.borrarArchivos(path);
-		ArchivoDeSalidaYML archivoYML = new ArchivoDeSalidaYML("prueba",
-				path);
+		ArchivoDeSalidaYML archivoYML = new ArchivoDeSalidaYML("prueba",path);
 		BuscadorDeArchivos ba = new BuscadorDeArchivos(path, "yml");
 
 		HashMap<Bicicleta, Integer> mapaBicicleta = new HashMap<Bicicleta, Integer>();
@@ -46,6 +45,20 @@ public class ArchivoDeSalidaYMLTest {
 			Assert.assertEquals(pathDeArchivoYmlEncontado.substring(pathDeArchivoYmlEncontado.length()-10),"prueba.yml");
 	}
 	
+	@Test
+	public void errorAlCerrarArchivoNoAbierto() {
+		String aviso="";
+		String path="salida/";
+		this.borrarArchivos(path);
+		ArchivoDeSalidaYML archivoYML = new ArchivoDeSalidaYML("",path);
+		
+		try {archivoYML.cerrarArchivo();}
+		catch (Exception e){
+			aviso="lanzoExcepcion";
+		}
+		Assert.assertEquals("lanzoExcepcion", aviso);
+	}
+		
 	private void borrarArchivos(String ruta) {
 		File archivo = new File(ruta);
 		File[] ficheros = archivo.listFiles();

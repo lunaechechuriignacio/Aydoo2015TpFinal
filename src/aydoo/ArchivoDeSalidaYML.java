@@ -27,6 +27,7 @@ public class ArchivoDeSalidaYML {
 					.concat(extension)));
 			this.buffer = new BufferedWriter(archivoYML);
 		} catch (IOException ex) {
+			ex.printStackTrace();
 		}
 	}
 
@@ -148,7 +149,6 @@ public class ArchivoDeSalidaYML {
 			this.buffer.close();
 			this.archivoYML.close();
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 
