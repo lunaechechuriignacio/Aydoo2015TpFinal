@@ -1,5 +1,8 @@
 package aydoo;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -18,6 +21,29 @@ public class ProcesadorEstadisticoDaemonTest  {
 		Assert.assertNotNull(procesadorEstadistico);
 	
 	}*/
+	
+	@Test
+	public void testEjecucionDaemon() {
+		
+		
+		TimerTask timerTask = new TimerTask()
+	    {
+	        public void run() 
+	        {
+	        	String pathDeEntrada="entradas_tests/";
+				
+	    		ProcesadorEstadistico procesadorEstadistico=new ProcesadorEstadisticoDaemon(pathDeEntrada);
+	        	procesadorEstadistico.ejecutar();
+	        }
+	    };
+	    
+	    Timer timer = new Timer();
+	    // Dentro de 0 milisegundos avísame cada 1000 milisegundos
+	    timer.scheduleAtFixedRate(timerTask, 0, 1000);
+		
+		Assert.assertNotNull(timer);
+	
+	}
 	
 	@Test
 	public void testGenerarInformeDaemon() {
