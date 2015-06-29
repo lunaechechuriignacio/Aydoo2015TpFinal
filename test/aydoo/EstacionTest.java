@@ -33,4 +33,16 @@ public class EstacionTest {
 
 		Assert.assertEquals(retiro.getId(), "100");
 	}
+	
+	@Test
+	public void ponerIdyNombreDeLaEstacion() {
+		Estacion retiro = new Estacion("retiro", "100");
+		
+		retiro.setId("1");
+		retiro.setNombre("EstacionRetiro");
+
+		Assert.assertEquals(retiro.getId(), "1");
+		Assert.assertEquals(retiro.getNombre(), "EstacionRetiro");
+	}
+	
 }

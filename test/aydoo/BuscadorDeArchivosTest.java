@@ -1,5 +1,7 @@
 package aydoo;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 
@@ -38,6 +40,7 @@ public class BuscadorDeArchivosTest {
 	public void testCarpetaConContenido(){
 		
 		String rutaDeBusqueda="entradas_tests/";
+		Path pathEntrada=Paths.get(rutaDeBusqueda);
 		String extensionArchivoBuscado="zip";
 		
 		BuscadorDeArchivos bda_conContenidos = new BuscadorDeArchivos(rutaDeBusqueda,extensionArchivoBuscado);
@@ -46,6 +49,7 @@ public class BuscadorDeArchivosTest {
 		
 		Assert.assertFalse(listaArchivos.isEmpty());
 		Assert.assertTrue(listaArchivos.size()>1);
+		Assert.assertEquals(pathEntrada, bda_conContenidos.getDirectorioSupervisado());
 
 	}
 	
