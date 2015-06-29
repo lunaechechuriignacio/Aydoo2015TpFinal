@@ -1,0 +1,19 @@
+El modo de ejecucion se ajusta 100% a lo solicitado en el mail del 25-06-2015 con asunto: "IMPORTANTE: Especificaciones de ejecución del TP final":
+
+Una vez compilada la aplicacion se ejecuta de la siguiente forma: 
+
+Modo demonio
+
+java aydoo.Procesador <pathAbsolutoADirectorioConArchivosDeEntrada> demonio
+        
+Modo on-demand
+
+java aydoo.Procesador <pathAbsolutoADirectorioConArchivosDeEntrada>
+
+   
+En ambos casos los archivos de salida se ubicaran en un directorio llamado "salida" dentro del directorio de donde se encuentra la aplicacion. De no existir dicha carpeta, la misma sera creada por el programa. 
+
+Por default, dado que los archivos .class estaran dentro del directorio build (en su respectivo package, para este caso "aydo") el programa cumple completamente los requerimientos de ejecucion.
+
+Ignacio Luna Echechuri (22763)
+Martin Fernandez Gamen (22764)
