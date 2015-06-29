@@ -1,6 +1,6 @@
 package aydoo;
 
-import java.io.IOException;
+
 
 public class ProcesadorEstadisticoOnDemand implements ProcesadorEstadistico {
 
@@ -20,9 +20,9 @@ public class ProcesadorEstadisticoOnDemand implements ProcesadorEstadistico {
 				
 		try {
 			this.procesador.generarInforme(this.pathEntrada,this.pathDeSalidaInforme, false);
-		} catch (IOException e) {
+		} catch (Exception e) {
 
-			e.printStackTrace();
+			 System.out.println( "Se ha producido un error, el directiorio se encuentra vacio" );
 		}
 
 	}
