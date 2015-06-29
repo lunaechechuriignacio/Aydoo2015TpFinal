@@ -2,6 +2,7 @@ package aydoo;
 
 import java.util.Iterator;
 import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -61,7 +62,6 @@ public class BuscadorDeArchivosTest {
 		Assert.assertTrue(listaArchivos.isEmpty());
 		Assert.assertEquals(0, listaArchivos.size());
 
-	}
-	
+	}	
 
 }

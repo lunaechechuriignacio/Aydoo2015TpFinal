@@ -1,6 +1,8 @@
 package aydoo;
 
+import java.io.File;
 import java.io.IOException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,8 +11,9 @@ public class ProcesadorDeDatosTest {
 	@Test
 	public void generarInformeConProcesadorDeDatosOnDemandTest(){
 		
-		String pathSalidaDeInforme="salidas/pruebas/YML/";
+		String pathSalidaDeInforme="salida/";
 		String pathEntradaDeInforme="entradas_tests/";
+		this.borrarArchivos(pathSalidaDeInforme);
 		boolean isDaemon=false;
 		
 		try {
@@ -25,8 +28,9 @@ public class ProcesadorDeDatosTest {
 	@Test
 	public void generarInformeConProcesadorDeDatosDaemonTest(){
 		
-		String pathSalidaDeInforme="salidas/pruebas/YML/";
+		String pathSalidaDeInforme="salida/";
 		String pathEntradaDeInforme="entradas_tests/";
+		this.borrarArchivos(pathSalidaDeInforme);
 		boolean isDaemon=true;
 		
 		try {
@@ -36,6 +40,19 @@ public class ProcesadorDeDatosTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void borrarArchivos(String ruta) {
+		File archivo = new File(ruta);
+		File[] ficheros = archivo.listFiles();
+		File f = null;
+		if (archivo.exists()) {
+			for (int x = 0; x < ficheros.length; x++) {
+				f = new File(ficheros[x].toString());
+				f.delete();
+			}
+		}
+
 	}
 	
 }

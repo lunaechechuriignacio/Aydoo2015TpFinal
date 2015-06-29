@@ -4,6 +4,7 @@ public class Procesador {
 
 	public static void main(String[] args) {
 
+		@SuppressWarnings("unused")
 		ProcesadorEstadistico procesador;
 		String path = args[0];
 		Boolean esDemonio = null;

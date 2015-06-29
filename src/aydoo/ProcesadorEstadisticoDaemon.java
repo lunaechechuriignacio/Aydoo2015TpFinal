@@ -5,7 +5,7 @@ import java.io.IOException;
 public class ProcesadorEstadisticoDaemon implements ProcesadorEstadistico {
 	
 	private String pathEntrada;
-	private String pathDeSalidaInforme="salidas/daemon/YML/";
+	private String pathDeSalidaInforme="salida/";
 	private ProcesadorDeDatos procesador;
 	
 	public ProcesadorEstadisticoDaemon(String pathEntrada) {

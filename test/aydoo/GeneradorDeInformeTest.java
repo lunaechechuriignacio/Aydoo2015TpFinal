@@ -1,5 +1,6 @@
 package aydoo;
 
+import java.io.File;
 import java.io.IOException;
 
 
@@ -16,7 +17,8 @@ public class GeneradorDeInformeTest {
 	public void comprobarValorContadorDeArhivosEjecutandoGeneradorYSeteandoloManualmente() {
 		
 		String path="entradas_tests/temporal/recorrido-2012a.csv";
-		String pathDeSalida="salidas/pruebas/YML/GeneradorDeInforme/";
+		String pathDeSalida="salida/";
+		this.borrarArchivos(pathDeSalida);
 		BuscadorDeArchivos ba=new BuscadorDeArchivos(path,"csv");
 		int contadorDeArchivos=0;
 	GeneradorDeInforme gdi=new GeneradorDeInforme(ba.getListaArchivosEnDirectorio(),pathDeSalida,contadorDeArchivos);
@@ -38,7 +40,9 @@ public class GeneradorDeInformeTest {
 		public void comprobarQueFueGeneradoUnArchivoDeSalida() {
 			String path="entradas_tests/temporal/recorrido-2012a.csv";
 
-			String pathDeSalida="salidas/pruebas/GeneradorDeInforme/";
+			String pathDeSalida="salida/";
+			
+			this.borrarArchivos(pathDeSalida);
 
 			BuscadorDeArchivos ba=new BuscadorDeArchivos(path,"csv");
 			int contadorDeArchivos=0;
@@ -63,6 +67,18 @@ public class GeneradorDeInformeTest {
 	
 
 		}
+		
+		private void borrarArchivos(String ruta) {
+			File archivo = new File(ruta);
+			File[] ficheros = archivo.listFiles();
+			File f = null;
+			if (archivo.exists()) {
+				for (int x = 0; x < ficheros.length; x++) {
+					f = new File(ficheros[x].toString());
+					f.delete();
+				}
+			}
 
+		}
 
 }

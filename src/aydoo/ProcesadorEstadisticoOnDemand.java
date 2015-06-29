@@ -5,7 +5,7 @@ import java.io.IOException;
 public class ProcesadorEstadisticoOnDemand implements ProcesadorEstadistico {
 
 	private String pathEntrada;
-	private String pathDeSalidaInforme="salidas/onDemand/YML/";
+	private String pathDeSalidaInforme="salida/";
 	private ProcesadorDeDatos procesador;
 	
 	public ProcesadorEstadisticoOnDemand(String pathEntrada) {

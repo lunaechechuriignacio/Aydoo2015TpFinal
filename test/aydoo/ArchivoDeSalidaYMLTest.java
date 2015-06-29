@@ -1,7 +1,9 @@
 package aydoo;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,7 +12,8 @@ public class ArchivoDeSalidaYMLTest {
 	@Test
 	public void generoUnArchivsdfsdfsdfsdo() {
 	
-		String  path="salidas/pruebas/YML/ArchivoSalidaYML/";
+		String  path="salida/";
+		this.borrarArchivos(path);
 		ArchivoDeSalidaYML archivoYML = new ArchivoDeSalidaYML("prueba",
 				path);
 		BuscadorDeArchivos ba = new BuscadorDeArchivos(path, "yml");
@@ -41,6 +44,19 @@ public class ArchivoDeSalidaYMLTest {
 			Assert.assertEquals(listadodeArchivos.size(),1,0);
 
 			Assert.assertEquals(pathDeArchivoYmlEncontado.substring(pathDeArchivoYmlEncontado.length()-10),"prueba.yml");
+	}
+	
+	private void borrarArchivos(String ruta) {
+		File archivo = new File(ruta);
+		File[] ficheros = archivo.listFiles();
+		File f = null;
+		if (archivo.exists()) {
+			for (int x = 0; x < ficheros.length; x++) {
+				f = new File(ficheros[x].toString());
+				f.delete();
+			}
+		}
+
 	}
 
 	
