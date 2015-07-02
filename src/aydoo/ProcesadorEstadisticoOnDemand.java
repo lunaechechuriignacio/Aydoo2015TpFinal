@@ -22,7 +22,8 @@ public class ProcesadorEstadisticoOnDemand implements ProcesadorEstadistico {
 			this.procesador.generarInforme(this.pathEntrada,this.pathDeSalidaInforme, false);
 		} catch (Exception e) {
 
-			 System.out.println( "Se ha producido un error, el directiorio se encuentra vacio" );
+			 //System.out.println( "Se ha producido un error, el directiorio se encuentra vacio" );
+			e.printStackTrace();
 		}
 
 	}

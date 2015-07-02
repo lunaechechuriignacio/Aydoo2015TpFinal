@@ -42,7 +42,7 @@ public class BuscadorDeArchivos {
 				String extencionDeArchivo=listaArchivos[x].substring(listaArchivos[x].length() - 3,listaArchivos[x].length());
 				if (extencionDeArchivo.equals(tipoDeArchivoABuscar))
 					listaArchivosEnDirectorio.add(this.directorioSupervisado
-							.toString().concat("\\").concat(listaArchivos[x]));
+							.toString().concat("/").concat(listaArchivos[x]));
 			}
 		}
 

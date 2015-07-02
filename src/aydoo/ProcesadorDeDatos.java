@@ -6,7 +6,7 @@ import java.util.EmptyStackException;
 import java.util.List;
 
 public class ProcesadorDeDatos {
-	private String pathTemporal = "/temporal";
+	private String pathTemporal = "/temporal/";
 	private String pathSalidaDeInforme, path;
 	private int contadorDeArchivos;
 
@@ -22,7 +22,8 @@ public class ProcesadorDeDatos {
 
 		DescomprimidorArchivosZip descomprimidor = new DescomprimidorArchivosZip(
 				path, path.concat(this.pathTemporal));
-		this.contadorDeArchivos = 1;
+		//this.contadorDeArchivos = 1;
+		this.contadorDeArchivos =this.buscarArchivos(this.pathSalidaDeInforme,"yml").size()+1;
 		List<String> pathLista = this.buscarArchivos(this.path, "zip");
 		this.borrarArchivos();
 		if (!pathLista.isEmpty()) {
