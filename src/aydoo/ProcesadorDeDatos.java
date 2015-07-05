@@ -2,11 +2,12 @@ package aydoo;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.EmptyStackException;
 import java.util.List;
 
 public class ProcesadorDeDatos {
-	private String pathTemporal = "/temporal/";
+	private final String pathTemporal = "/temporal/";
 	private String pathSalidaDeInforme, path;
 	private int contadorDeArchivos;
 
@@ -19,7 +20,8 @@ public class ProcesadorDeDatos {
 	}
 
 	private void ejecutar(Boolean esDaemon) throws IOException {
-
+		//INICIAL
+		Date start = new Date();
 		DescomprimidorArchivosZip descomprimidor = new DescomprimidorArchivosZip(
 				path, path.concat(this.pathTemporal));
 		//this.contadorDeArchivos = 1;
@@ -33,11 +35,20 @@ public class ProcesadorDeDatos {
 				descomprimidor.descomprimirArchivosZip();
 				if (esDaemon) {
 					this.aplicarGenerarInforme(esDaemon);
+					//FINAL
+					Date end = new Date();
+					System.out.println("Tardo: " + (end.getTime()-start.getTime()));
 					
 				}
 			}
-			if (!esDaemon)
+			if (!esDaemon) {
 				this.aplicarGenerarInforme(esDaemon);
+				Date end = new Date();
+				System.out.println("Tardo: " + (end.getTime()-start.getTime()));
+			}
+			//FINAL
+			Date end = new Date();
+
 		}else
 			throw new EmptyStackException();
 	}
