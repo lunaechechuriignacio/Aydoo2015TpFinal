@@ -11,9 +11,9 @@ import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 
 public class SupervisadorDeDirectorio {
-	private Path directorioSupervisado;
+	private final Path directorioSupervisado;
 	private WatchService servicio;
-	private ProcesadorEstadisticoDaemon procesadorDaemon;
+	private final ProcesadorEstadisticoDaemon procesadorDaemon;
 	
 
 	public SupervisadorDeDirectorio(String directorio ,ProcesadorEstadisticoDaemon procesadorDaemon) {
