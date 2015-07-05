@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class ManejoDeArchivo {
 	private String path;
@@ -51,9 +50,11 @@ public class ManejoDeArchivo {
 						registro = buffer.readLine();
 						esPrimeraLinea = false;
 					}
+					String[] registroSeparadaPorComas = registro.split(";");
+					if (registroSeparadaPorComas.length == 9){
+						this.llenarDatos(registroSeparadaPorComas);
+					}
 
-					StringTokenizer dividir = new StringTokenizer(registro, ";");
-					this.llenarDatos(dividir);
 
 				}
 			} catch (IOException e) {
@@ -63,7 +64,7 @@ public class ManejoDeArchivo {
 		}
 	}
 
-	private void llenarDatos(StringTokenizer dividir) {
+	private void llenarDatos(String[] registroSeparadaPorComas) {
 		String idBicicleta=null;
 		String nombreEstacionOrigen = null;
 		String idEstacionDestino = null;
@@ -73,73 +74,36 @@ public class ManejoDeArchivo {
 		String fechaOrigen = null;
 		int contadorDeColumnas = 0;
 		this.contadorDeRegistrosEnArchivo++;
-		
-		while (dividir.hasMoreTokens()) {
-			String dato = dividir.nextToken();
-			switch (contadorDeColumnas) {
-			case 1:
-				this.llenarMapaBicicleta(dato);
-				idBicicleta=dato;
-				break;
 
-			case 2:
-				fechaOrigen = dato;
-				break;
 
-			case 3: {
-				idEstacionOrigen = dato;
-				recorrido = dato;
-				break;
+
+		this.llenarMapaBicicleta(registroSeparadaPorComas[1]);
+		idBicicleta=registroSeparadaPorComas[1];
+		fechaOrigen = registroSeparadaPorComas[2];
+		idEstacionOrigen = registroSeparadaPorComas[3];
+		recorrido = registroSeparadaPorComas[3];
+		nombreEstacionOrigen = registroSeparadaPorComas[4];
+		fechaDestino = registroSeparadaPorComas[5];
+		recorrido = recorrido.concat(registroSeparadaPorComas[6]);
+		idEstacionDestino = registroSeparadaPorComas[6];
+		this.llenarMapaRecorrido(idEstacionOrigen, idEstacionDestino, fechaOrigen, fechaDestino, nombreEstacionOrigen, registroSeparadaPorComas[7]);
+
+		if (!registroSeparadaPorComas[8].isEmpty()){
+			this.tiempoTotalDeUso += (Float.parseFloat(registroSeparadaPorComas[8]));
+			//Ademas lo agrego a la lista;
+			if(Float.parseFloat(registroSeparadaPorComas[8])>=tiempoMaximoRecorrido){
+
+				if (Float.parseFloat(registroSeparadaPorComas[8])==tiempoMaximoRecorrido){
+
+					tiempoMaximoRecorrido = Float.parseFloat(registroSeparadaPorComas[8]);
+					listaIdBicicletaMaximoRecorrido.add(idBicicleta);
+				}
+				else {
+					tiempoMaximoRecorrido = Float.parseFloat(registroSeparadaPorComas[8]);
+					listaIdBicicletaMaximoRecorrido.clear();
+					listaIdBicicletaMaximoRecorrido.add(idBicicleta);
+				}
 			}
-			case 4:
-				nombreEstacionOrigen = dato;
-				break;
-			case 5:
-				fechaDestino = dato;
-				break;
-
-			case 6: {
-				recorrido = recorrido.concat(dato);
-				idEstacionDestino = dato;
-
-				break;
-			}
-
-			case 7: {
-				this.llenarMapaRecorrido(idEstacionOrigen, idEstacionDestino,
-						fechaOrigen, fechaDestino, nombreEstacionOrigen, dato);
-
-				break;
-			}
-			case 8: {
-				if (!dato.isEmpty()){
-					this.tiempoTotalDeUso += (Float.parseFloat(dato));
-					//Ademas lo agrego a la lista;
-					if(Float.parseFloat(dato)>=tiempoMaximoRecorrido){
-						
-						if (Float.parseFloat(dato)==tiempoMaximoRecorrido){
-							
-							tiempoMaximoRecorrido = Float.parseFloat(dato);
-							listaIdBicicletaMaximoRecorrido.add(idBicicleta);
-						}
-						
-						else {
-							
-							tiempoMaximoRecorrido = Float.parseFloat(dato);
-							listaIdBicicletaMaximoRecorrido.clear();
-							listaIdBicicletaMaximoRecorrido.add(idBicicleta);
-							
-						}
-						
-						
-					}
-				}		
-
-				
-				break;
-			}
-			}
-			contadorDeColumnas++;
 		}
 
 	}
