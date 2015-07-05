@@ -1,7 +1,7 @@
 package aydoo;
 
 public class Bicicleta {
-	private String id;
+	private final String id;
 
 	public Bicicleta(String id) {
 		this.id = id;
