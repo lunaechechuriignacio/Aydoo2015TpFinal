@@ -3,6 +3,7 @@ package aydoo;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class GeneradorDeInforme {
@@ -11,7 +12,9 @@ public class GeneradorDeInforme {
 	private List<String> listaArchivos;
 	private String pathSalida;
 	private String nombreArchivoSalida = "Salida";
-
+	private float tiempoMaximoRecorrido;
+	private List<String> listaIdBicicletaMaximoRecorrido;
+	
 	private int contadorDeArchivos;
 
 	public GeneradorDeInforme(List<String> listaArchivos, String pathSalida,
@@ -21,6 +24,7 @@ public class GeneradorDeInforme {
 		this.listaArchivos = listaArchivos;
 		this.pathSalida = pathSalida;
 		this.contadorDeArchivos = contadorDeArchivos;
+		this.listaIdBicicletaMaximoRecorrido = new LinkedList<String>();
 	}
 
 	public void generarInforme(Boolean esDaemon) throws IOException {
@@ -42,13 +46,13 @@ public class GeneradorDeInforme {
 				this.mapaRecorrido = manejoDeArchivo.getMapaRecorrido();
 				contadorDeRegistros+=manejoDeArchivo.getContadorDeRegistrosEnArchivo();
 				tiempoTotal+=manejoDeArchivo.getTiempoTotal();
-						  
+				this.listaIdBicicletaMaximoRecorrido = manejoDeArchivo.getListaIdBicicletaMaximoRecorrido();
+				this.tiempoMaximoRecorrido = manejoDeArchivo.getTiempoMaximo();
 				 
 				 }
 
 		
-		float tiempoPromedio=tiempoTotal/contadorDeRegistros;
-		
+		float tiempoPromedio=tiempoTotal/contadorDeRegistros;		
 		this.guardarEnArchivo(this.contadorDeArchivos,tiempoPromedio);
 		this.resetearVariables();
 	}
@@ -65,7 +69,7 @@ public class GeneradorDeInforme {
 		archivoYML = new ArchivoDeSalidaYML(nombreArchivoSalida
 				+ contadorDeArchivos, this.pathSalida);
 
-		archivoYML.escribirEnArchivo(this.mapaBicicleta,this.mapaRecorrido,tiempoPromedio);
+		archivoYML.escribirEnArchivo(this.mapaBicicleta,this.mapaRecorrido,tiempoPromedio, this.listaIdBicicletaMaximoRecorrido, this.tiempoMaximoRecorrido);
 		archivoYML.cerrarArchivo();
 
 	}

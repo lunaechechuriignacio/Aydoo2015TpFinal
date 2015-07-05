@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class ManejoDeArchivo {
@@ -12,6 +14,8 @@ public class ManejoDeArchivo {
 	private HashMap<Recorrido, Integer> mapaRecorrido;
 	private float tiempoTotalDeUso;
 	private int contadorDeRegistrosEnArchivo;
+	private float tiempoMaximoRecorrido;
+	private List<String> listaIdBicicletaMaximoRecorrido;
 
 	public ManejoDeArchivo(String pathArchivo,
 			HashMap<Bicicleta, Integer> mapaBicicleta,
@@ -22,6 +26,8 @@ public class ManejoDeArchivo {
 
 		this.tiempoTotalDeUso = 0;
 		this.contadorDeRegistrosEnArchivo = 0;
+		tiempoMaximoRecorrido=0;
+		listaIdBicicletaMaximoRecorrido = new LinkedList<String>();
 	}
 
 	public int getContadorDeRegistrosEnArchivo() {
@@ -58,6 +64,7 @@ public class ManejoDeArchivo {
 	}
 
 	private void llenarDatos(StringTokenizer dividir) {
+		String idBicicleta=null;
 		String nombreEstacionOrigen = null;
 		String idEstacionDestino = null;
 		String idEstacionOrigen = null;
@@ -66,11 +73,13 @@ public class ManejoDeArchivo {
 		String fechaOrigen = null;
 		int contadorDeColumnas = 0;
 		this.contadorDeRegistrosEnArchivo++;
+		
 		while (dividir.hasMoreTokens()) {
 			String dato = dividir.nextToken();
 			switch (contadorDeColumnas) {
 			case 1:
 				this.llenarMapaBicicleta(dato);
+				idBicicleta=dato;
 				break;
 
 			case 2:
@@ -103,15 +112,44 @@ public class ManejoDeArchivo {
 				break;
 			}
 			case 8: {
-				if (!dato.isEmpty())
+				if (!dato.isEmpty()){
 					this.tiempoTotalDeUso += (Float.parseFloat(dato));
+					//Ademas lo agrego a la lista;
+					if(Float.parseFloat(dato)>=tiempoMaximoRecorrido){
+						
+						if (Float.parseFloat(dato)==tiempoMaximoRecorrido){
+							
+							tiempoMaximoRecorrido = Float.parseFloat(dato);
+							listaIdBicicletaMaximoRecorrido.add(idBicicleta);
+						}
+						
+						else {
+							
+							tiempoMaximoRecorrido = Float.parseFloat(dato);
+							listaIdBicicletaMaximoRecorrido.clear();
+							listaIdBicicletaMaximoRecorrido.add(idBicicleta);
+							
+						}
+						
+						
+					}
+				}		
 
+				
 				break;
 			}
 			}
 			contadorDeColumnas++;
 		}
 
+	}
+
+	public float getTiempoMaximo() {
+		return tiempoMaximoRecorrido;
+	}
+
+	public List<String> getListaIdBicicletaMaximoRecorrido() {
+		return listaIdBicicletaMaximoRecorrido;
 	}
 
 	public HashMap<Recorrido, Integer> getMapaRecorrido() {

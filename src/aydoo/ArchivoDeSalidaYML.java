@@ -4,7 +4,9 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ArchivoDeSalidaYML {
@@ -31,8 +33,7 @@ public class ArchivoDeSalidaYML {
 		}
 	}
 
-	public void escribirEnArchivo(HashMap<Bicicleta, Integer> mapaBicicleta,
-			HashMap<Recorrido, Integer> mapaRecorrido, float tiempoPromedio) {
+	public void escribirEnArchivo(HashMap<Bicicleta, Integer> mapaBicicleta, HashMap<Recorrido, Integer> mapaRecorrido, float tiempoPromedio, List<String> listaIdBicicletaMayorRecorrido, float tiempoMaximo) {
 		this.crearArchivo();
 		escritura = new PrintWriter(buffer);
 		this.valorMAximoMininoBicicleta(mapaBicicleta);
@@ -48,7 +49,12 @@ public class ArchivoDeSalidaYML {
 
 		escritura.println("Tiempo promedio de uso: "
 				+ String.valueOf(tiempoPromedio));
-
+		
+		escritura.println("Bicicleta utilizada mas tiempo:");
+		this.escribirListaIdBicicletaMaximoRecorrido(listaIdBicicletaMayorRecorrido, escritura);
+		
+		escritura.println("Tiempo de la bicicleta mas utilizada: "+ String.valueOf(tiempoMaximo));
+		
 		escritura.close();
 	}
 
@@ -101,7 +107,19 @@ public class ArchivoDeSalidaYML {
 		}
 
 	}
+	
+	private void escribirListaIdBicicletaMaximoRecorrido(List<String> lista, PrintWriter escritura) {
 
+		
+		for (String id : lista) {
+			
+				escritura.println("    id: " + id);
+
+			}
+	
+	}
+	
+	//Refactorizar!!!
 	private void valorMAximoMininoBicicleta(
 			HashMap<Bicicleta, Integer> mapaBicicleta) {
 
@@ -143,7 +161,7 @@ public class ArchivoDeSalidaYML {
 
 		return valorMaximoRecorrido;
 	}
-
+	
 	public void cerrarArchivo() {
 		try {
 			this.buffer.close();
