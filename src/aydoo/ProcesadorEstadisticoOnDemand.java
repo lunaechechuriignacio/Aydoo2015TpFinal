@@ -4,9 +4,9 @@ package aydoo;
 
 public class ProcesadorEstadisticoOnDemand implements ProcesadorEstadistico {
 
-	private String pathEntrada;
-	private String pathDeSalidaInforme="salida/";
-	private ProcesadorDeDatos procesador;
+	private final String pathEntrada;
+	private final String pathDeSalidaInforme="salida/";
+	private final ProcesadorDeDatos procesador;
 	
 	public ProcesadorEstadisticoOnDemand(String pathEntrada) {
 		
