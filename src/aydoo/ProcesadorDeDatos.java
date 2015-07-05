@@ -46,8 +46,6 @@ public class ProcesadorDeDatos {
 				Date end = new Date();
 				System.out.println("Tardo: " + (end.getTime()-start.getTime()));
 			}
-			//FINAL
-			Date end = new Date();
 
 		}else
 			throw new EmptyStackException();
