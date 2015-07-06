@@ -36,6 +36,7 @@ public class GeneradorDeInforme {
 		String pathArchivo = "";
 
 		if (!listaArchivos.isEmpty())
+			
 			while (iteradorLista.hasNext()) {
 
 				pathArchivo = iteradorLista.next();
@@ -55,6 +56,7 @@ public class GeneradorDeInforme {
 		float tiempoPromedio=tiempoTotal/contadorDeRegistros;		
 		this.guardarEnArchivo(this.contadorDeArchivos,tiempoPromedio);
 		this.resetearVariables();
+	
 	}
 
 	private void resetearVariables() {
