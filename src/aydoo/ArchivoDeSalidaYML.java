@@ -68,9 +68,9 @@ public class ArchivoDeSalidaYML {
 			if (valorMaximoRecorrido == mapa.getValue()) {
 				recorrido = mapa.getKey();
 				
-				escritura.println("id origen: "
+				escritura.println("    id origen: "
 						+ recorrido.getEstacionOrigen().getId());
-				escritura.println("id destino: "
+				escritura.println("    id destino: "
 						+ recorrido.getEstacionDestino().getId());
 			}
 
@@ -85,7 +85,7 @@ public class ArchivoDeSalidaYML {
 			if (valorMinimoBicicleta == mapa.getValue()) {
 				bicicleta = mapa.getKey();
 				
-				escritura.println("id: " + bicicleta.getId());
+				escritura.println("    id: " + bicicleta.getId());
 
 			}
 		}
@@ -101,7 +101,7 @@ public class ArchivoDeSalidaYML {
 			if (valorMaximoBicicleta == mapa.getValue()) {
 				bicicleta = mapa.getKey();
 				
-				escritura.println("id: " + bicicleta.getId());
+				escritura.println("    id: " + bicicleta.getId());
 
 			}
 		}

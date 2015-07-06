@@ -10,7 +10,7 @@ import java.util.EmptyStackException;
 import java.util.List;
 
 public class ProcesadorDeDatos {
-	private final String pathTemporal = "/temporal/";
+	private String pathTemporal = "/temporal/";
 	private String pathSalidaDeInforme, path;
 	private int contadorDeArchivos;
 
@@ -24,8 +24,6 @@ public class ProcesadorDeDatos {
 
 	private void ejecutar(Boolean esDaemon) throws IOException {
 		
-		System.out.println("Entre en metodo ejecutar");
-		
 		//INICIAL
 		Date start = new Date();
 		DescomprimidorArchivosZip descomprimidor = new DescomprimidorArchivosZip(
@@ -35,11 +33,8 @@ public class ProcesadorDeDatos {
 		List<String> pathLista = this.buscarArchivos(this.path, "zip");
 		this.borrarArchivos();
 		
-		Writer output = new BufferedWriter(new FileWriter(pathSalidaDeInforme+"Salida"+contadorDeArchivos+".yml", true));
-		
+		Writer output;
 
-
-		
 		if (!pathLista.isEmpty()) {
 			
 			for (String archivosZip : pathLista) {
@@ -47,23 +42,22 @@ public class ProcesadorDeDatos {
 				descomprimidor.setPathZip(archivosZip);
 				descomprimidor.descomprimirArchivosZip();
 				if (esDaemon) {
-					System.out.println("Entre en modo Daemon");
 					this.aplicarGenerarInforme(esDaemon);
 					//FINAL
 					Date end = new Date();
+					output = new BufferedWriter(new FileWriter(pathSalidaDeInforme+"Salida"+(contadorDeArchivos-1)+".yml", true));
 					output.append("Tiempo de Procesamiento: " + (end.getTime()-start.getTime()));
 					output.close();
 					
 				}
-				System.out.println(pathSalidaDeInforme+"Salida"+contadorDeArchivos+".yml");
+				
 			}
 			if (!esDaemon) {
-				System.out.println("Entre en modo On-Demand");
 				this.aplicarGenerarInforme(esDaemon);
 				Date end = new Date();
+				output = new BufferedWriter(new FileWriter(pathSalidaDeInforme+"Salida"+(contadorDeArchivos-1)+".yml", true));
 				output.append("Tiempo de Procesamiento: " + (end.getTime()-start.getTime()));
 				output.close();
-				System.out.println(pathSalidaDeInforme+"Salida"+contadorDeArchivos+".yml");
 			}
 			
 
@@ -77,8 +71,7 @@ public class ProcesadorDeDatos {
 				this.pathSalidaDeInforme, this.contadorDeArchivos);
 		generador.generarInforme(esDaemon);
 		this.contadorDeArchivos = generador.getContadorDeArchivos();
-		
-		this.borrarArchivos();
+this.borrarArchivos();
 
 	}
 
