@@ -95,11 +95,11 @@ public class ManejoDeArchivo {
 
 				if (Float.parseFloat(registroSeparadaPorComas[8])==tiempoMaximoRecorrido){
 
-					tiempoMaximoRecorrido = Float.parseFloat(registroSeparadaPorComas[8]);
+					tiempoMaximoRecorrido = Float.parseFloat(registroSeparadaPorComas[8])*60;
 					listaIdBicicletaMaximoRecorrido.add(idBicicleta);
 				}
 				else {
-					tiempoMaximoRecorrido = Float.parseFloat(registroSeparadaPorComas[8]);
+					tiempoMaximoRecorrido = Float.parseFloat(registroSeparadaPorComas[8])*60;
 					listaIdBicicletaMaximoRecorrido.clear();
 					listaIdBicicletaMaximoRecorrido.add(idBicicleta);
 				}
