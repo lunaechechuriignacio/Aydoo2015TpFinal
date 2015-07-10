@@ -57,5 +57,31 @@ public class ManejoDeArchivosTest {
 		Assert.assertEquals(mda.getTiempoTotal(), 0, 0);
 
 	}
+	
+	@Test
+	public void leerUnArchivoYCalcularElTiempoMaximoDeRecorrido(){
+		
+		
+		HashMap<Bicicleta, Integer> mapaBicicleta = new HashMap<Bicicleta, Integer>();
+		HashMap<Recorrido, Integer> mapaRecorrido = new HashMap<Recorrido, Integer>();
+		ManejoDeArchivo mda = new ManejoDeArchivo(
+				"entradas_tests/recorridos-2010a.csv", mapaBicicleta,
+				mapaRecorrido);
+		mda.setPathArchivo("entradas_tests/recorridos-2010a.csv");
+		
+		try {
+
+			mda.leerArchivoCsv();
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
+		Assert.assertTrue(mda.getTiempoMaximo()==606.0);
+		Assert.assertTrue(mda.getListaIdBicicletaMaximoRecorrido().get(0).equals("462"));
+		
+		
+	}
 
 }

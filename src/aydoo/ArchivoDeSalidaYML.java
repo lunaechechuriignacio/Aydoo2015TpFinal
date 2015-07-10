@@ -53,7 +53,7 @@ public class ArchivoDeSalidaYML {
 		escritura.println("Bicicleta utilizada mas tiempo:");
 		this.escribirListaIdBicicletaMaximoRecorrido(listaIdBicicletaMayorRecorrido, escritura);
 		
-		escritura.println("Tiempo de la bicicleta mas utilizada: "+ String.valueOf(tiempoMaximo));
+		escritura.println("Tiempo de la bicicleta mas utilizada: "+ String.valueOf((int)tiempoMaximo*60));
 		
 		escritura.close();
 	}

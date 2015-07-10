@@ -65,6 +65,7 @@ public class ManejoDeArchivo {
 	}
 
 	private void llenarDatos(String[] registroSeparadaPorComas) {
+		
 		String idBicicleta=null;
 		String nombreEstacionOrigen = null;
 		String idEstacionDestino = null;
@@ -95,15 +96,16 @@ public class ManejoDeArchivo {
 
 				if (Float.parseFloat(registroSeparadaPorComas[8])==tiempoMaximoRecorrido){
 
-					tiempoMaximoRecorrido = Float.parseFloat(registroSeparadaPorComas[8])*60;
+					tiempoMaximoRecorrido = Float.parseFloat(registroSeparadaPorComas[8]);
 					listaIdBicicletaMaximoRecorrido.add(idBicicleta);
 				}
 				else {
-					tiempoMaximoRecorrido = Float.parseFloat(registroSeparadaPorComas[8])*60;
+					tiempoMaximoRecorrido = Float.parseFloat(registroSeparadaPorComas[8]);
 					listaIdBicicletaMaximoRecorrido.clear();
 					listaIdBicicletaMaximoRecorrido.add(idBicicleta);
 				}
 			}
+						
 		}
 
 	}
