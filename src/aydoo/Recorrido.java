@@ -1,8 +1,8 @@
 package aydoo;
 
 public class Recorrido {
-	private Estacion estacionOrigen = null;
-	private Estacion estacionDestino = null;
+	private final Estacion estacionOrigen ;
+	private final Estacion estacionDestino;
 	private String fechaOrigen, fechaDestino;
 
 	public Recorrido(Estacion estacionOrigen, Estacion estacionDestino) {
@@ -22,10 +22,7 @@ public class Recorrido {
 	@Override
 	public boolean equals(Object obj) {
 		Recorrido recorrido = (Recorrido) obj;
-		boolean hola = (this.estacionDestino.getId()
-				.equals(recorrido.estacionDestino.getId()))
-				&& (this.estacionOrigen.getId().equals(recorrido.estacionOrigen
-						.getId()));
+		boolean hola = this.estacionDestino.getId().equals(recorrido.estacionDestino.getId()) && this.estacionOrigen.getId().equals(recorrido.estacionOrigen.getId());
 		return hola;
 	}
 

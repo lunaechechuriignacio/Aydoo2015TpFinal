@@ -4,7 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.StringTokenizer;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ManejoDeArchivo {
 	private String path;
@@ -12,6 +13,8 @@ public class ManejoDeArchivo {
 	private HashMap<Recorrido, Integer> mapaRecorrido;
 	private float tiempoTotalDeUso;
 	private int contadorDeRegistrosEnArchivo;
+	private float tiempoMaximoRecorrido;
+	private List<String> listaIdBicicletaMaximoRecorrido;
 
 	public ManejoDeArchivo(String pathArchivo,
 			HashMap<Bicicleta, Integer> mapaBicicleta,
@@ -22,6 +25,8 @@ public class ManejoDeArchivo {
 
 		this.tiempoTotalDeUso = 0;
 		this.contadorDeRegistrosEnArchivo = 0;
+		tiempoMaximoRecorrido=0;
+		listaIdBicicletaMaximoRecorrido = new LinkedList<String>();
 	}
 
 	public int getContadorDeRegistrosEnArchivo() {
@@ -45,9 +50,11 @@ public class ManejoDeArchivo {
 						registro = buffer.readLine();
 						esPrimeraLinea = false;
 					}
+					String[] registroSeparadaPorComas = registro.split(";");
+					if (registroSeparadaPorComas.length == 9){
+						this.llenarDatos(registroSeparadaPorComas);
+					}
 
-					StringTokenizer dividir = new StringTokenizer(registro, ";");
-					this.llenarDatos(dividir);
 
 				}
 			} catch (IOException e) {
@@ -57,7 +64,9 @@ public class ManejoDeArchivo {
 		}
 	}
 
-	private void llenarDatos(StringTokenizer dividir) {
+	private void llenarDatos(String[] registroSeparadaPorComas) {
+		
+		String idBicicleta=null;
 		String nombreEstacionOrigen = null;
 		String idEstacionDestino = null;
 		String idEstacionOrigen = null;
@@ -66,52 +75,47 @@ public class ManejoDeArchivo {
 		String fechaOrigen = null;
 		int contadorDeColumnas = 0;
 		this.contadorDeRegistrosEnArchivo++;
-		while (dividir.hasMoreTokens()) {
-			String dato = dividir.nextToken();
-			switch (contadorDeColumnas) {
-			case 1:
-				this.llenarMapaBicicleta(dato);
-				break;
 
-			case 2:
-				fechaOrigen = dato;
-				break;
 
-			case 3: {
-				idEstacionOrigen = dato;
-				recorrido = dato;
-				break;
+
+		this.llenarMapaBicicleta(registroSeparadaPorComas[1]);
+		idBicicleta=registroSeparadaPorComas[1];
+		fechaOrigen = registroSeparadaPorComas[2];
+		idEstacionOrigen = registroSeparadaPorComas[3];
+		recorrido = registroSeparadaPorComas[3];
+		nombreEstacionOrigen = registroSeparadaPorComas[4];
+		fechaDestino = registroSeparadaPorComas[5];
+		recorrido = recorrido.concat(registroSeparadaPorComas[6]);
+		idEstacionDestino = registroSeparadaPorComas[6];
+		this.llenarMapaRecorrido(idEstacionOrigen, idEstacionDestino, fechaOrigen, fechaDestino, nombreEstacionOrigen, registroSeparadaPorComas[7]);
+
+		if (!registroSeparadaPorComas[8].isEmpty()){
+			this.tiempoTotalDeUso += (Float.parseFloat(registroSeparadaPorComas[8]));
+			//Ademas lo agrego a la lista;
+			if(Float.parseFloat(registroSeparadaPorComas[8])>=tiempoMaximoRecorrido){
+
+				if (Float.parseFloat(registroSeparadaPorComas[8])==tiempoMaximoRecorrido){
+
+					tiempoMaximoRecorrido = Float.parseFloat(registroSeparadaPorComas[8]);
+					listaIdBicicletaMaximoRecorrido.add(idBicicleta);
+				}
+				else {
+					tiempoMaximoRecorrido = Float.parseFloat(registroSeparadaPorComas[8]);
+					listaIdBicicletaMaximoRecorrido.clear();
+					listaIdBicicletaMaximoRecorrido.add(idBicicleta);
+				}
 			}
-			case 4:
-				nombreEstacionOrigen = dato;
-				break;
-			case 5:
-				fechaDestino = dato;
-				break;
-
-			case 6: {
-				recorrido = recorrido.concat(dato);
-				idEstacionDestino = dato;
-
-				break;
-			}
-
-			case 7: {
-				this.llenarMapaRecorrido(idEstacionOrigen, idEstacionDestino,
-						fechaOrigen, fechaDestino, nombreEstacionOrigen, dato);
-
-				break;
-			}
-			case 8: {
-				if (!dato.isEmpty())
-					this.tiempoTotalDeUso += (Float.parseFloat(dato));
-
-				break;
-			}
-			}
-			contadorDeColumnas++;
+						
 		}
 
+	}
+
+	public float getTiempoMaximo() {
+		return tiempoMaximoRecorrido;
+	}
+
+	public List<String> getListaIdBicicletaMaximoRecorrido() {
+		return listaIdBicicletaMaximoRecorrido;
 	}
 
 	public HashMap<Recorrido, Integer> getMapaRecorrido() {

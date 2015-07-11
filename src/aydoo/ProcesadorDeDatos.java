@@ -1,7 +1,11 @@
 package aydoo;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.util.Date;
 import java.util.EmptyStackException;
 import java.util.List;
 
@@ -19,25 +23,44 @@ public class ProcesadorDeDatos {
 	}
 
 	private void ejecutar(Boolean esDaemon) throws IOException {
-
+		
+		//INICIAL
+		Date start = new Date();
 		DescomprimidorArchivosZip descomprimidor = new DescomprimidorArchivosZip(
 				path, path.concat(this.pathTemporal));
 		//this.contadorDeArchivos = 1;
-		this.contadorDeArchivos =this.buscarArchivos(this.pathSalidaDeInforme,"yml").size()+1;
+		this.contadorDeArchivos = this.buscarArchivos(this.pathSalidaDeInforme,"yml").size()+1;
 		List<String> pathLista = this.buscarArchivos(this.path, "zip");
 		this.borrarArchivos();
+		
+		Writer output;
+
 		if (!pathLista.isEmpty()) {
+			
 			for (String archivosZip : pathLista) {
 
 				descomprimidor.setPathZip(archivosZip);
 				descomprimidor.descomprimirArchivosZip();
 				if (esDaemon) {
 					this.aplicarGenerarInforme(esDaemon);
+					//FINAL
+					Date end = new Date();
+					output = new BufferedWriter(new FileWriter(pathSalidaDeInforme+"Salida"+(contadorDeArchivos-1)+".yml", true));
+					output.append("Tiempo de Procesamiento: " + (end.getTime()-start.getTime()));
+					output.close();
 					
 				}
+				
 			}
-			if (!esDaemon)
+			if (!esDaemon) {
 				this.aplicarGenerarInforme(esDaemon);
+				Date end = new Date();
+				output = new BufferedWriter(new FileWriter(pathSalidaDeInforme+"Salida"+(contadorDeArchivos-1)+".yml", true));
+				output.append("Tiempo de Procesamiento: " + (end.getTime()-start.getTime()));
+				output.close();
+			}
+			
+
 		}else
 			throw new EmptyStackException();
 	}

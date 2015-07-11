@@ -11,7 +11,7 @@ import java.util.zip.ZipInputStream;
 public class DescomprimidorArchivosZip {
 
 	private String pathZip;
-	private String pathSalida;
+	private final String pathSalida;
 	private File directorio;
 
 	public DescomprimidorArchivosZip(String pathZip, String pathDeSalida) {

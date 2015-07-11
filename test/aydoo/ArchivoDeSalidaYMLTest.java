@@ -2,6 +2,7 @@ package aydoo;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Assert;
@@ -26,11 +27,14 @@ public class ArchivoDeSalidaYMLTest {
 		mapaBicicleta.put(new Bicicleta("10"), 1);
 		mapaBicicleta.put(new Bicicleta("11"), 2);
 		mapaBicicleta.put(new Bicicleta("12"), 4);
+		
+		List<String> lista = new LinkedList<String>();
+		lista.add("1234");
 
 		mapaRecorrido.put(new Recorrido(retiro, callao), 1);
 		mapaRecorrido.put(new Recorrido(retiro, beiro), 4);
 		mapaRecorrido.put(new Recorrido(beiro, callao), 2);
-		archivoYML.escribirEnArchivo(mapaBicicleta, mapaRecorrido, 20);
+		archivoYML.escribirEnArchivo(mapaBicicleta, mapaRecorrido, 20, lista, 100);
 		archivoYML.cerrarArchivo();
 		
 		ba.setDirectorioSupervisado(path);
