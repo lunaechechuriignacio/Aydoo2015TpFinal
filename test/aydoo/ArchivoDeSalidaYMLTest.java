@@ -30,7 +30,12 @@ public class ArchivoDeSalidaYMLTest {
 		mapaRecorrido.put(new Recorrido(retiro, callao), 1);
 		mapaRecorrido.put(new Recorrido(retiro, beiro), 4);
 		mapaRecorrido.put(new Recorrido(beiro, callao), 2);
-		archivoYML.escribirEnArchivo(mapaBicicleta, mapaRecorrido, 20);
+		
+		GeneradorDeInforme generadorInforme = new GeneradorDeInforme(null, path, 0);
+		generadorInforme.setMapaBicicleta(mapaBicicleta);
+		generadorInforme.setMapaRecorrido(mapaRecorrido);
+		generadorInforme.setTiempoPromedio(20);
+		archivoYML.escribirEnArchivo(generadorInforme);
 		archivoYML.cerrarArchivo();
 		
 		ba.setDirectorioSupervisado(path);

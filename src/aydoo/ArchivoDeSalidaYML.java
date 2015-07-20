@@ -4,8 +4,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.ListIterator;
 
 public class ArchivoDeSalidaYML {
 	private String nombreArchivo;
@@ -14,7 +14,6 @@ public class ArchivoDeSalidaYML {
 	private PrintWriter escritura = null;
 	private String extension = ".yml";
 	private String path;
-	private int valorMinimoBicicleta, valorMaximoBicicleta;
 
 	public ArchivoDeSalidaYML(String nombreArchivo, String path) {
 		this.nombreArchivo = nombreArchivo;
@@ -31,117 +30,69 @@ public class ArchivoDeSalidaYML {
 		}
 	}
 
-	public void escribirEnArchivo(HashMap<Bicicleta, Integer> mapaBicicleta,
-			HashMap<Recorrido, Integer> mapaRecorrido, float tiempoPromedio) {
+	public void escribirEnArchivo(GeneradorDeInforme generadorInforme) {
 		this.crearArchivo();
 		escritura = new PrintWriter(buffer);
-		this.valorMAximoMininoBicicleta(mapaBicicleta);
-		
+				
 		escritura.println("Bicicletas mas usadas:");
-		this.escribirMaximoValorDeBicicleta(mapaBicicleta, escritura);
+		this.escribirMaximoValorDeBicicleta(generadorInforme, escritura);
 		
 		escritura.println("Bicicletas menos usadas:");
-		this.escribirMinimoValorDeBicicleta(mapaBicicleta, escritura);
+		this.escribirMinimoValorDeBicicleta(generadorInforme, escritura);
 		
 		escritura.println("Recorrido mas realizado:");
-		this.escribirRecorridoMasUtilizado(mapaRecorrido, escritura);
+		this.escribirRecorridoMasUtilizado(generadorInforme, escritura);
 
-		escritura.println("Tiempo promedio de uso: "
-				+ String.valueOf(tiempoPromedio));
+		escritura.println("Tiempo promedio de uso: "+ String.valueOf(generadorInforme.getTiempoPromedio()));
 
 		escritura.close();
 	}
 
-	private void escribirRecorridoMasUtilizado(
-			HashMap<Recorrido, Integer> mapaRecorrido, PrintWriter escritura) {
+	private void escribirRecorridoMasUtilizado(GeneradorDeInforme generadorInforme, PrintWriter escritura) {
 
 		Recorrido recorrido = null;
-		int valorMaximoRecorrido = this.valorMAximoRecorrido(mapaRecorrido);
+		List<Recorrido> recorridos = generadorInforme.getListaMaximosRecorridos();
+		ListIterator<Recorrido> iterador = recorridos.listIterator();
 		
-		for (Map.Entry<Recorrido, Integer> mapa : mapaRecorrido.entrySet())
-			if (valorMaximoRecorrido == mapa.getValue()) {
-				recorrido = mapa.getKey();
+		while (iterador.hasNext()){
+		
+				recorrido = iterador.next();
 				
 				escritura.println("id origen: "
 						+ recorrido.getEstacionOrigen().getId());
 				escritura.println("id destino: "
 						+ recorrido.getEstacionDestino().getId());
-			}
+		}
 
 	}
 
-	private void escribirMinimoValorDeBicicleta(
-			HashMap<Bicicleta, Integer> mapaBicicleta, PrintWriter escritura) {
+	private void escribirMinimoValorDeBicicleta(GeneradorDeInforme generadorInforme, PrintWriter escritura) {
 
 		Bicicleta bicicleta = null;
+		List<Bicicleta> bicicletas = generadorInforme.getListaBicicletasMinimos();
+		ListIterator<Bicicleta> iterador = bicicletas.listIterator();
 		
-		for (Map.Entry<Bicicleta, Integer> mapa : mapaBicicleta.entrySet()) {
-			if (valorMinimoBicicleta == mapa.getValue()) {
-				bicicleta = mapa.getKey();
+		while (iterador.hasNext()){
+		
+			bicicleta = iterador.next();
 				
-				escritura.println("id: " + bicicleta.getId());
-
-			}
+			escritura.println("id: " + bicicleta.getId());
 		}
-
 	}
 
-	private void escribirMaximoValorDeBicicleta(
-			HashMap<Bicicleta, Integer> mapaBicicleta, PrintWriter escritura2) {
+	private void escribirMaximoValorDeBicicleta(GeneradorDeInforme generadorInforme,PrintWriter escritura2) {
 
 		Bicicleta bicicleta = null;
+		List<Bicicleta> bicicletas = generadorInforme.getListaBicicletasMaximos();
+		ListIterator<Bicicleta> iterador = bicicletas.listIterator();
 		
-		for (Map.Entry<Bicicleta, Integer> mapa : mapaBicicleta.entrySet()) {
-			if (valorMaximoBicicleta == mapa.getValue()) {
-				bicicleta = mapa.getKey();
+		while (iterador.hasNext()){
+		
+			bicicleta = iterador.next();
 				
-				escritura.println("id: " + bicicleta.getId());
-
-			}
+			escritura.println("id: " + bicicleta.getId());
 		}
 
-	}
-
-	private void valorMAximoMininoBicicleta(
-			HashMap<Bicicleta, Integer> mapaBicicleta) {
-
-		boolean estadoPrimeraVuelta = false;
-
-		for (Map.Entry<Bicicleta, Integer> mapa : mapaBicicleta.entrySet()) {
-			if (!estadoPrimeraVuelta) {
-				this.valorMaximoBicicleta = valorMinimoBicicleta = mapa
-						.getValue();
-
-				estadoPrimeraVuelta = true;
-			} else {
-				if (this.valorMaximoBicicleta < mapa.getValue())
-					this.valorMaximoBicicleta = mapa.getValue();
-
-				if (valorMinimoBicicleta > mapa.getValue())
-					valorMinimoBicicleta = mapa.getValue();
-
-			}
-
-		}
-
-	}
-
-	private int valorMAximoRecorrido(HashMap<Recorrido, Integer> mapaRecorrido) {
-
-		int valorMaximoRecorrido = 0;
-
-		boolean estadoPrimeraVuelta = false;
-
-		for (Map.Entry<Recorrido, Integer> mapa : mapaRecorrido.entrySet()) {
-			if (!estadoPrimeraVuelta) {
-				valorMaximoRecorrido = mapa.getValue();
-				estadoPrimeraVuelta = true;
-			} else if (valorMaximoRecorrido < mapa.getValue())
-
-				valorMaximoRecorrido = mapa.getValue();
-		}
-
-		return valorMaximoRecorrido;
 	}
 
 	public void cerrarArchivo() {

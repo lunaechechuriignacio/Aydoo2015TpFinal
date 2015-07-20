@@ -22,7 +22,7 @@ public class ProcesadorDeDatos {
 
 		DescomprimidorArchivosZip descomprimidor = new DescomprimidorArchivosZip(
 				path, path.concat(this.pathTemporal));
-		//this.contadorDeArchivos = 1;
+		
 		this.contadorDeArchivos =this.buscarArchivos(this.pathSalidaDeInforme,"yml").size()+1;
 		List<String> pathLista = this.buscarArchivos(this.path, "zip");
 		this.borrarArchivos();
@@ -54,8 +54,7 @@ this.borrarArchivos();
 
 	private List<String> buscarArchivos(String path, String tipoDeArchivoABuscar) {
 
-		BuscadorDeArchivos buscador = new BuscadorDeArchivos(path,
-				tipoDeArchivoABuscar);
+		BuscadorDeArchivos buscador = new BuscadorDeArchivos(path,tipoDeArchivoABuscar);
 		return buscador.getListaArchivosEnDirectorio();
 
 	}

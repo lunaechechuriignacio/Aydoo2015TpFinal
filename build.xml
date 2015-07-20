@@ -131,7 +131,7 @@
 		</cobertura-report>
 	</target>
 
-    <target name="test" depends="compilar.tests.sin.instrumentar">
+    <target name="test" depends="compilar.tests.sin.instrumentar, integracion-continua">
         <junit fork="no" failureProperty="test.failure" showoutput="true">
             <classpath location="${build}" />
             <classpath refid="classpath" />
