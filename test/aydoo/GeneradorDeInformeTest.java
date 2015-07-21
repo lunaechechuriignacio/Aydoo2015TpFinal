@@ -45,8 +45,7 @@ public class GeneradorDeInformeTest {
 			this.borrarArchivos(pathDeSalida);
 
 			BuscadorDeArchivos ba=new BuscadorDeArchivos(path,"csv");
-			int contadorDeArchivos=0;
-		GeneradorDeInforme gdi=new GeneradorDeInforme(ba.getListaArchivosEnDirectorio(),pathDeSalida,contadorDeArchivos);
+			int contadorDeArchivos=0;		GeneradorDeInforme gdi=new GeneradorDeInforme(ba.getListaArchivosEnDirectorio(),pathDeSalida,contadorDeArchivos);
 		try {
 			gdi.generarInforme(true);
 		} catch (IOException e) {

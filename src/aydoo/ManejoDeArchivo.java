@@ -4,17 +4,15 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.TreeMap;
 
 public class ManejoDeArchivo {
 	private String path;
 	private HashMap<Bicicleta, Integer> mapaBicicleta;
 	private HashMap<Recorrido, Integer> mapaRecorrido;
+	private TreeMap<String, Integer> mapaTiemposPromedio;
 	private float tiempoTotalDeUso;
 	private int contadorDeRegistrosEnArchivo;
-	private float tiempoMaximoRecorrido;
-	private List<String> listaIdBicicletaMaximoRecorrido;
 
 	public ManejoDeArchivo(String pathArchivo,
 			HashMap<Bicicleta, Integer> mapaBicicleta,
@@ -25,8 +23,7 @@ public class ManejoDeArchivo {
 
 		this.tiempoTotalDeUso = 0;
 		this.contadorDeRegistrosEnArchivo = 0;
-		tiempoMaximoRecorrido=0;
-		listaIdBicicletaMaximoRecorrido = new LinkedList<String>();
+		this.mapaTiemposPromedio = new TreeMap<String, Integer>();
 	}
 
 	public int getContadorDeRegistrosEnArchivo() {
@@ -76,8 +73,6 @@ public class ManejoDeArchivo {
 		int contadorDeColumnas = 0;
 		this.contadorDeRegistrosEnArchivo++;
 
-
-
 		this.llenarMapaBicicleta(registroSeparadaPorComas[1]);
 		idBicicleta=registroSeparadaPorComas[1];
 		fechaOrigen = registroSeparadaPorComas[2];
@@ -90,38 +85,35 @@ public class ManejoDeArchivo {
 		this.llenarMapaRecorrido(idEstacionOrigen, idEstacionDestino, fechaOrigen, fechaDestino, nombreEstacionOrigen, registroSeparadaPorComas[7]);
 
 		if (!registroSeparadaPorComas[8].isEmpty()){
-			this.tiempoTotalDeUso += (Float.parseFloat(registroSeparadaPorComas[8]));
-			//Ademas lo agrego a la lista;
-			if(Float.parseFloat(registroSeparadaPorComas[8])>=tiempoMaximoRecorrido){
-
-				if (Float.parseFloat(registroSeparadaPorComas[8])==tiempoMaximoRecorrido){
-
-					tiempoMaximoRecorrido = Float.parseFloat(registroSeparadaPorComas[8]);
-					listaIdBicicletaMaximoRecorrido.add(idBicicleta);
-				}
-				else {
-					tiempoMaximoRecorrido = Float.parseFloat(registroSeparadaPorComas[8]);
-					listaIdBicicletaMaximoRecorrido.clear();
-					listaIdBicicletaMaximoRecorrido.add(idBicicleta);
-				}
-			}
 						
+			this.llenarMapaTiemposPromedio(registroSeparadaPorComas[1], registroSeparadaPorComas[8]);
+			tiempoTotalDeUso+= Float.parseFloat(registroSeparadaPorComas[8]);
+			
 		}
+			
 
-	}
-
-	public float getTiempoMaximo() {
-		return tiempoMaximoRecorrido;
-	}
-
-	public List<String> getListaIdBicicletaMaximoRecorrido() {
-		return listaIdBicicletaMaximoRecorrido;
 	}
 
 	public HashMap<Recorrido, Integer> getMapaRecorrido() {
 		return mapaRecorrido;
 	}
 
+	private void llenarMapaTiemposPromedio(String id, String tiempo){
+		
+		Integer temporal;
+		
+		if (mapaTiemposPromedio.containsKey(id)){
+			
+			temporal = mapaTiemposPromedio.get(id);
+			temporal = temporal + Integer.parseInt(tiempo);
+			mapaTiemposPromedio.put(id, temporal);
+		}
+		
+		else {
+			mapaTiemposPromedio.put(id, Integer.parseInt(tiempo));
+		}
+	}
+	
 	private void llenarMapaBicicleta(String idBicicleta) {
 
 		Bicicleta bicicletaNueva = new Bicicleta(idBicicleta);
@@ -165,5 +157,9 @@ public class ManejoDeArchivo {
 	public float getTiempoTotal() {
 
 		return this.tiempoTotalDeUso;
+	}
+
+	public TreeMap<String, Integer> getMapaTiemposPromedio() {
+		return mapaTiemposPromedio;
 	}
 }
