@@ -12,7 +12,7 @@ Modo on-demand
 java aydoo.Procesador <pathAbsolutoADirectorioConArchivosDeEntrada>
 
    
-En ambos casos los archivos de salida se ubicaran en un directorio llamado "salida" dentro del directorio de donde se encuentra la aplicacion. De no existir dicha carpeta, la misma sera creada por el programa. 
+En ambos casos los archivos de salida se ubicaran en un directorio llamado "salida" dentro del directorio de donde se encuentra la aplicacion (en la carpeta build luego de compilar). De no existir dicha carpeta, la misma sera creada por el programa. 
 
 Por default, dado que los archivos .class estaran dentro del directorio build (en su respectivo package, para este caso "aydo") el programa cumple completamente los requerimientos de ejecucion.
 
