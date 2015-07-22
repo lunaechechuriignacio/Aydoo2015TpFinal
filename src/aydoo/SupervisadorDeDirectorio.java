@@ -22,8 +22,7 @@ public class SupervisadorDeDirectorio {
 			ProcesadorEstadisticoDaemon procesadorDaemon) {
 		this.directorioSupervisado = Paths.get(directorio);
 		this.procesadorDaemon = procesadorDaemon;
-		this.fullPath = null;
-
+		
 	}
 
 	private void crearEventoWatch() {

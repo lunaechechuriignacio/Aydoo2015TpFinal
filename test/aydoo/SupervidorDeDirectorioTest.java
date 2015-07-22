@@ -10,7 +10,7 @@ import java.io.OutputStream;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class SupervidorDeArchivoTest {
+public class SupervidorDeDirectorioTest {
 
 	@Test
 	public void agregarArchivoAlDirectorioSupervisado() {
