@@ -1,30 +1,8 @@
 Bicicletas mas usadas:
-id: 419
+id: 705
 Bicicletas menos usadas:
-id: 1198
-id: 1419
-id: 1313
-id: 1179
-id: 1000
-id: 920
-id: 1122
-id: 1127
-id: 727
-id: 102
-id: 694
-id: 911
-id: 891
-id: 77
-id: 385
-id: 66
-id: 979
-id: 633
-id: 445
-id: 63
-id: 251
-id: 651
-id: 1201
+id: 734
 Recorrido mas realizado:
-id origen: 5
-id destino: 3
-Tiempo promedio de uso: 42.027817
+id origen: 3
+id destino: 7
+Tiempo promedio de uso: 27.321362
