@@ -58,60 +58,26 @@ public class ManejoDeArchivo {
 	}
 
 	private void llenarDatos(StringTokenizer dividir) {
-		String nombreEstacionOrigen = null;
-		String idEstacionDestino = null;
-		String idEstacionOrigen = null;
-		String recorrido = null;
-		String fechaDestino = null;
-		String fechaOrigen = null;
-		int contadorDeColumnas = 0;
 		this.contadorDeRegistrosEnArchivo++;
+		
+		String[] datos = new String[dividir.countTokens() ];
+	 	
+		int indiceArray=0;
+	 	
 		while (dividir.hasMoreTokens()) {
-			String dato = dividir.nextToken();
-			switch (contadorDeColumnas) {
-			case 1:
-				this.llenarMapaBicicleta(dato);
-				break;
-
-			case 2:
-				fechaOrigen = dato;
-				break;
-
-			case 3: {
-				idEstacionOrigen = dato;
-				recorrido = dato;
-				break;
-			}
-			case 4:
-				nombreEstacionOrigen = dato;
-				break;
-			case 5:
-				fechaDestino = dato;
-				break;
-
-			case 6: {
-				recorrido = recorrido.concat(dato);
-				idEstacionDestino = dato;
-
-				break;
-			}
-
-			case 7: {
-				this.llenarMapaRecorrido(idEstacionOrigen, idEstacionDestino,
-						fechaOrigen, fechaDestino, nombreEstacionOrigen, dato);
-
-				break;
-			}
-			case 8: {
-				if (!dato.isEmpty())
-					this.tiempoTotalDeUso += (Float.parseFloat(dato));
-
-				break;
-			}
-			}
-			contadorDeColumnas++;
+		 	String dato = dividir.nextToken();
+		 	datos[indiceArray]=dato;
+		 	indiceArray++;
 		}
-
+		 
+		this.llenarMapaBicicleta(datos[1]);
+		 	 
+		this.llenarMapaRecorrido(datos[3], datos[6],datos[2], datos[5],datos[4], datos[7]); 
+		
+		if (datos.length==9){
+			this.tiempoTotalDeUso += (Float.parseFloat(datos[8]));
+		}
+		
 	}
 
 	public HashMap<Recorrido, Integer> getMapaRecorrido() {
