@@ -4,28 +4,20 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 public class ManejoDeArchivo {
 	private String path;
 	private HashMap<Bicicleta, Integer> mapaBicicleta;
 	private HashMap<Recorrido, Integer> mapaRecorrido;
-	private float tiempoTotalDeUso;
-	private int contadorDeRegistrosEnArchivo;
-
+	
 	public ManejoDeArchivo(String pathArchivo,
 			HashMap<Bicicleta, Integer> mapaBicicleta,
 			HashMap<Recorrido, Integer> mapaRecorrido) {
 		this.path = pathArchivo;
 		this.mapaBicicleta = mapaBicicleta;
 		this.mapaRecorrido = mapaRecorrido;
-
-		this.tiempoTotalDeUso = 0;
-		this.contadorDeRegistrosEnArchivo = 0;
-	}
-
-	public int getContadorDeRegistrosEnArchivo() {
-		return contadorDeRegistrosEnArchivo;
 	}
 
 	public void setPathArchivo(String path) {
@@ -58,7 +50,7 @@ public class ManejoDeArchivo {
 	}
 
 	private void llenarDatos(StringTokenizer dividir) {
-		this.contadorDeRegistrosEnArchivo++;
+		float tiempoDeUso=0;
 		
 		String[] datos = new String[dividir.countTokens() ];
 	 	
@@ -70,13 +62,15 @@ public class ManejoDeArchivo {
 		 	indiceArray++;
 		}
 		 
+		if (datos.length==9){
+			tiempoDeUso = (Float.parseFloat(datos[8]));
+		} else {
+			tiempoDeUso=0;
+		}
+		
 		this.llenarMapaBicicleta(datos[1]);
 		 	 
-		this.llenarMapaRecorrido(datos[3], datos[6],datos[2], datos[5],datos[4], datos[7]); 
-		
-		if (datos.length==9){
-			this.tiempoTotalDeUso += (Float.parseFloat(datos[8]));
-		}
+		this.llenarMapaRecorrido(datos[3], datos[6],datos[2], datos[5],datos[4], datos[7],tiempoDeUso); 	
 		
 	}
 
@@ -100,7 +94,8 @@ public class ManejoDeArchivo {
 	}
 
 	private void llenarMapaRecorrido(String idEstacionOrigen,
-			String idEstacionDestino, String fechaOrigen, String fechaDestino,String nombreOrigen,String nombreDestino) {
+			String idEstacionDestino, String fechaOrigen, String fechaDestino,
+			String nombreOrigen,String nombreDestino,float tiempoDeUso) {
 		Estacion estacionOrigen = new Estacion(nombreOrigen, idEstacionOrigen);
 
 		Estacion estacionDestino = new Estacion(nombreDestino, idEstacionDestino);
@@ -111,8 +106,17 @@ public class ManejoDeArchivo {
 		if (this.mapaRecorrido.containsKey(recorrido)) {
 			int contador = this.mapaRecorrido.get(recorrido);
 			contador++;
+			for (Map.Entry<Recorrido, Integer> mapa : mapaRecorrido.entrySet()) {
+				
+				if (mapa.getKey().equals(recorrido)){
+				
+					mapa.getKey().setTiempoDeUso(tiempoDeUso);
+					this.mapaRecorrido.put(mapa.getKey(), contador);	
+				}
+				
+			}
 
-			this.mapaRecorrido.put(recorrido, contador);
+			
 		} else
 
 			this.mapaRecorrido.put(recorrido, 1);
@@ -124,8 +128,4 @@ public class ManejoDeArchivo {
 		return mapaBicicleta;
 	}
 
-	public float getTiempoTotal() {
-
-		return this.tiempoTotalDeUso;
-	}
 }

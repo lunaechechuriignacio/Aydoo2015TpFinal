@@ -14,8 +14,9 @@ public class GeneradorDeInforme {
 	private String pathSalida;
 	private String nombreArchivoSalida = "Salida";
 	private int valorMinimoBicicleta, valorMaximoBicicleta;
-	float tiempoPromedio;
-
+	private float tiempoPromedio;
+	//private float tiempoTotalDeUso;
+	//private int contadorDeViajes;
 
 	private int contadorDeArchivos;
 
@@ -48,10 +49,9 @@ public class GeneradorDeInforme {
 				manejoDeArchivo.leerArchivoCsv();
 				this.mapaBicicleta = manejoDeArchivo.getMapaBicicleta();
 				this.mapaRecorrido = manejoDeArchivo.getMapaRecorrido();
-				contadorDeRegistros+=manejoDeArchivo.getContadorDeRegistrosEnArchivo();
-				tiempoTotal+=manejoDeArchivo.getTiempoTotal();
-						  
-				 
+				contadorDeRegistros+=this.getCantidadTotalDeViajes();
+				tiempoTotal+=this.getTiempoTotalDeUso();
+						  	 
 			}
 		}
 		this.tiempoPromedio=tiempoTotal/contadorDeRegistros;
@@ -194,5 +194,31 @@ public class GeneradorDeInforme {
 	public void setTiempoPromedio(float tiempoPromedio) {
 		this.tiempoPromedio = tiempoPromedio;
 	}
+	
+	private int getCantidadTotalDeViajes(){
+		
+		int totalViajes=0;
+		
+		for (Map.Entry<Bicicleta, Integer> mapa : this.mapaBicicleta.entrySet()) {
+			
+			totalViajes+= mapa.getValue();
 
+		}
+		
+		return totalViajes;
+	}
+
+	private int getTiempoTotalDeUso(){
+		
+		int tiempoTotalUso=0;
+		
+		for (Map.Entry<Recorrido, Integer> mapa : this.mapaRecorrido.entrySet()) {
+			
+			tiempoTotalUso+= mapa.getKey().getTiempoDeUso();
+
+		}
+		
+		return tiempoTotalUso;
+	}
+	
 }

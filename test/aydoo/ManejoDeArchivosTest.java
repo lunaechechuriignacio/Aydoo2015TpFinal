@@ -29,8 +29,6 @@ public class ManejoDeArchivosTest {
 		Assert.assertNotEquals(mda.getMapaRecorrido().size(), 0);
 		Assert.assertNotEquals(mda.getMapaRecorrido().size(), 0);
 		Assert.assertNotEquals(mda.getMapaBicicleta().size(), 0);
-		Assert.assertNotEquals(mda.getContadorDeRegistrosEnArchivo(), 0);
-		Assert.assertNotEquals(mda.getTiempoTotal(), 0);
 
 	}
 
@@ -53,8 +51,6 @@ public class ManejoDeArchivosTest {
 		Assert.assertEquals(mda.getMapaRecorrido().size(), 0);
 		Assert.assertEquals(mda.getMapaRecorrido().size(), 0);
 		Assert.assertEquals(mda.getMapaBicicleta().size(), 0);
-		Assert.assertEquals(mda.getContadorDeRegistrosEnArchivo(), 0);
-		Assert.assertEquals(mda.getTiempoTotal(), 0, 0);
 
 	}
 

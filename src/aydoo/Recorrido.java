@@ -4,10 +4,12 @@ public class Recorrido {
 	private Estacion estacionOrigen = null;
 	private Estacion estacionDestino = null;
 	private String fechaOrigen, fechaDestino;
+	private float tiempoDeUso; 
 
 	public Recorrido(Estacion estacionOrigen, Estacion estacionDestino) {
 		this.estacionOrigen = estacionOrigen;
 		this.estacionDestino = estacionDestino;
+		this.setTiempoDeUso(0);
 
 	}
 
@@ -51,6 +53,14 @@ public class Recorrido {
 
 	public void setFechaDestino(String fechaDestino) {
 		this.fechaDestino = fechaDestino;
+	}
+
+	public float getTiempoDeUso() {
+		return tiempoDeUso;
+	}
+
+	public void setTiempoDeUso(float tiempoDeUso) {
+		this.tiempoDeUso += tiempoDeUso;
 	}
 
 }
