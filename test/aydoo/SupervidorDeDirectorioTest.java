@@ -29,13 +29,11 @@ public class SupervidorDeDirectorioTest {
 	}
 
 	@Test
-	public void noSeAgregarArchivoAlDirectorioSupervisado() {
+	public void noSeAgreganArchivosNuevosAlDirectorioSupervisadoTest() {
 		String directorio = "entradas_tests/testSupervidorDeDirectorio/";
 
 		ProcesadorEstadisticoDaemon procesadorDaemon = new ProcesadorEstadisticoDaemon(
 				directorio);
-
-		this.borrarArchivos();
 
 		SupervisadorDeDirectorio supervisor = new SupervisadorDeDirectorio(
 				directorio, procesadorDaemon);
