@@ -2,7 +2,6 @@ package aydoo;
 
 import java.io.File;
 import java.io.IOException;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,11 +13,12 @@ public class ProcesadorDeDatosTest {
 		String pathSalidaDeInforme="salida/";
 		String pathEntradaDeInforme="entradas_tests/";
 		this.borrarArchivos(pathSalidaDeInforme);
-		boolean isDaemon=false;
+	
 		
 		try {
 			ProcesadorDeDatos procesador = new ProcesadorDeDatos();
-			procesador.generarInforme(pathEntradaDeInforme, pathSalidaDeInforme, isDaemon);
+			procesador.generarInforme(pathEntradaDeInforme, pathSalidaDeInforme);
+			procesador.ejecutar();
 			Assert.assertNotNull(procesador);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -30,12 +30,15 @@ public class ProcesadorDeDatosTest {
 		
 		String pathSalidaDeInforme="salida/";
 		String pathEntradaDeInforme="entradas_tests/";
+		String fullPath="entradas_tests/recorridos-2010.zip";
+		
 		this.borrarArchivos(pathSalidaDeInforme);
-		boolean isDaemon=true;
+		
 		
 		try {
 			ProcesadorDeDatos procesador = new ProcesadorDeDatos();
-			procesador.generarInforme(pathEntradaDeInforme, pathSalidaDeInforme, isDaemon);
+			procesador.generarInforme(pathEntradaDeInforme, pathSalidaDeInforme);
+			procesador.ejecutar(fullPath, pathEntradaDeInforme);
 			Assert.assertNotNull(procesador);
 		} catch (IOException e) {
 			e.printStackTrace();

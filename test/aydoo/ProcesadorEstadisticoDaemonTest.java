@@ -48,9 +48,9 @@ public class ProcesadorEstadisticoDaemonTest  {
 	@Test
 	public void testGenerarInformeDaemon() {
 		String pathDeEntrada="entradas_tests/";
-				
+		String fullPath="entradas_tests/recorridos-2010.zip";
 		ProcesadorEstadisticoDaemon procesadorEstadistico=new ProcesadorEstadisticoDaemon(pathDeEntrada);
-		procesadorEstadistico.generarInforme();
+		procesadorEstadistico.generarInforme(fullPath);
 		
 		Assert.assertNotNull(procesadorEstadistico);
 	

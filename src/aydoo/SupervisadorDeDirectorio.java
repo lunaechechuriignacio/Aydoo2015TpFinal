@@ -2,6 +2,7 @@ package aydoo;
 
 import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
 import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,11 +15,11 @@ public class SupervisadorDeDirectorio {
 	private Path directorioSupervisado;
 	private WatchService servicio;
 	private ProcesadorEstadisticoDaemon procesadorDaemon;
-	
 
-	public SupervisadorDeDirectorio(String directorio ,ProcesadorEstadisticoDaemon procesadorDaemon) {
+	public SupervisadorDeDirectorio(String directorio,
+			ProcesadorEstadisticoDaemon procesadorDaemon) {
 		this.directorioSupervisado = Paths.get(directorio);
-		this.procesadorDaemon= procesadorDaemon;
+		this.procesadorDaemon = procesadorDaemon;
 
 	}
 
@@ -33,25 +34,15 @@ public class SupervisadorDeDirectorio {
 
 	}
 
-	public void correrSupervisadorDeDirectorio() {
+	public void correrSupervisadorDeDirectorio(int ciclo) {
 		this.crearEventoWatch();
 		try {
 			WatchKey key = null;
-			while (true) {
+			while (ciclo > 0) {
+				ciclo--;
 				key = servicio.take();
 
-				Kind<?> kind = null;
-				for (WatchEvent<?> watchEvent : key.pollEvents()) {
-
-					kind = watchEvent.kind();
-					if (OVERFLOW == kind) {
-						continue;
-					} else if (ENTRY_CREATE == kind) {
-						String extencionDeArchivo=watchEvent.context().toString().substring(watchEvent.context().toString().length()-3);
-						if (extencionDeArchivo.equals("zip"))
-						this.procesadorDaemon.generarInforme();
-					}
-				}
+				this.ejecutarEvento(key);
 
 				if (!key.reset()) {
 					break;
@@ -62,6 +53,32 @@ public class SupervisadorDeDirectorio {
 		}
 	}
 
+	private void ejecutarEvento(WatchKey key) {
+		Kind<?> kind = null;
+		for (WatchEvent<?> watchEvent : key.pollEvents()) {
+
+			kind = watchEvent.kind();
+			if (OVERFLOW == kind) {
+				continue;
+			} else if (ENTRY_CREATE == kind) {
+				this.procesarArchivoAgregado(watchEvent, key);
+			}
+		}
+	}
+
+	private void procesarArchivoAgregado(WatchEvent<?> watchEvent,WatchKey key){
+		String extencionDeArchivo = watchEvent
+						.context()
+						.toString()
+						.substring(watchEvent.context().toString().length() - 3);
+				@SuppressWarnings("unchecked")
+				WatchEvent<Path> ev = (WatchEvent<Path>) watchEvent;
+				Path dir = (Path)key.watchable();
+				Path fullPath = dir.resolve(ev.context());
+				if (extencionDeArchivo.equals("zip"))
+					this.procesadorDaemon.generarInforme(fullPath.toString());
+		
+	}
 	public WatchService getServicio() {
 		return servicio;
 	}

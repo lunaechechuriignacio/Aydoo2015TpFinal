@@ -4,8 +4,8 @@ public class Procesador {
 
 	public static void main(String[] args) {
 
-		ProcesadorEstadistico procesador;
-		String path = args[0];
+		
+		String path =args[0];
 		Boolean esDemonio = null;
 		File directorio = new File("salida");
 		if (!directorio.exists()) {
@@ -17,6 +17,11 @@ public class Procesador {
 		else
 			esDemonio=false;
 
+		ejecutar(esDemonio,path);
+	}
+	
+	private static void ejecutar(Boolean esDemonio,String path){
+		ProcesadorEstadistico procesador;
 		if (esDemonio) {
 
 			System.out.println("Ejecutando Modo Daemon");
@@ -30,5 +35,7 @@ public class Procesador {
 			procesador = new ProcesadorEstadisticoOnDemand(path);
 			procesador.ejecutar();
 		}
+		
 	}
+	
 }

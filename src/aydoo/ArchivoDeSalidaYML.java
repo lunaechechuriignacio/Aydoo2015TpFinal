@@ -35,7 +35,7 @@ public class ArchivoDeSalidaYML {
 		escritura = new PrintWriter(buffer);
 				
 		escritura.println("Bicicletas mas usadas:");
-		this.escribirMaximoValorDeBicicleta(generadorInforme, escritura);
+		this.escribirMaximoValorDeBicicleta(generadorInforme);
 		
 		escritura.println("Bicicletas menos usadas:");
 		this.escribirMinimoValorDeBicicleta(generadorInforme, escritura);
@@ -80,7 +80,7 @@ public class ArchivoDeSalidaYML {
 		}
 	}
 
-	private void escribirMaximoValorDeBicicleta(GeneradorDeInforme generadorInforme,PrintWriter escritura2) {
+	private void escribirMaximoValorDeBicicleta(GeneradorDeInforme generadorInforme) {
 
 		Bicicleta bicicleta = null;
 		List<Bicicleta> bicicletas = generadorInforme.getListaBicicletasMaximos();

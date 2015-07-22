@@ -23,7 +23,7 @@ public class GeneradorDeInformeTest {
 		int contadorDeArchivos=0;
 	GeneradorDeInforme gdi=new GeneradorDeInforme(ba.getListaArchivosEnDirectorio(),pathDeSalida,contadorDeArchivos);
 	try {
-		gdi.generarInforme(true);
+		gdi.generarInforme();
 	} catch (IOException e) {
 		
 		e.printStackTrace();
@@ -48,7 +48,7 @@ public class GeneradorDeInformeTest {
 			int contadorDeArchivos=0;
 		GeneradorDeInforme gdi=new GeneradorDeInforme(ba.getListaArchivosEnDirectorio(),pathDeSalida,contadorDeArchivos);
 		try {
-			gdi.generarInforme(true);
+			gdi.generarInforme();
 		} catch (IOException e) {
 			
 			e.printStackTrace();

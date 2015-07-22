@@ -25,29 +25,35 @@ public class ManejoDeArchivo {
 	}
 
 	public void leerArchivoCsv() throws IOException {
-		String registro = null;
-		BufferedReader buffer = null;
+
 		if (!(this.path == " ")) {
-			try {
-				buffer = new BufferedReader(new FileReader(this.path));
-				boolean esPrimeraLinea = true;
-
-				while ((registro = buffer.readLine()) != null) {
-					if (esPrimeraLinea) {
-						registro = buffer.readLine();
-						esPrimeraLinea = false;
-					}
-
-					StringTokenizer dividir = new StringTokenizer(registro, ";");
-					this.llenarDatos(dividir);
-
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			buffer.close();
+			leerRegistro();
 		}
 	}
+
+	private void leerRegistro() throws IOException {
+		String registro = null;
+		BufferedReader buffer = null;
+		try {
+			buffer = new BufferedReader(new FileReader(this.path));
+			boolean esPrimeraLinea = true;
+
+			while ((registro = buffer.readLine()) != null) {
+				if (esPrimeraLinea) {
+					registro = buffer.readLine();
+					esPrimeraLinea = false;
+				}
+
+				StringTokenizer dividir = new StringTokenizer(registro, ";");
+				this.llenarDatos(dividir);
+
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		buffer.close();
+	}
+
 
 	private void llenarDatos(StringTokenizer dividir) {
 		float tiempoDeUso=0;

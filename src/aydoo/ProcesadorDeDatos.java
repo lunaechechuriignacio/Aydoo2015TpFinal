@@ -2,6 +2,7 @@ package aydoo;
 
 import java.io.File;
 import java.io.IOException;
+
 import java.util.EmptyStackException;
 import java.util.List;
 
@@ -10,20 +11,20 @@ public class ProcesadorDeDatos {
 	private String pathSalidaDeInforme, path;
 	private int contadorDeArchivos;
 
-	public void generarInforme(String path, String pathSalidaInforme,
-			boolean esDaemon) throws IOException {
+	public void generarInforme(String path, String pathSalidaInforme)
+			throws IOException {
 		this.pathSalidaDeInforme = pathSalidaInforme;
 		this.path = path;
 
-		this.ejecutar(esDaemon);
 	}
 
-	private void ejecutar(Boolean esDaemon) throws IOException {
+	public void ejecutar() throws IOException {
 
 		DescomprimidorArchivosZip descomprimidor = new DescomprimidorArchivosZip(
 				path, path.concat(this.pathTemporal));
-		
-		this.contadorDeArchivos =this.buscarArchivos(this.pathSalidaDeInforme,"yml").size()+1;
+
+		this.contadorDeArchivos = this.buscarArchivos(this.pathSalidaDeInforme,
+				"yml").size() + 1;
 		List<String> pathLista = this.buscarArchivos(this.path, "zip");
 		this.borrarArchivos();
 		if (!pathLista.isEmpty()) {
@@ -31,30 +32,44 @@ public class ProcesadorDeDatos {
 
 				descomprimidor.setPathZip(archivosZip);
 				descomprimidor.descomprimirArchivosZip();
-				if (esDaemon) {
-					this.aplicarGenerarInforme(esDaemon);
-					
-				}
+
 			}
-			if (!esDaemon)
-				this.aplicarGenerarInforme(esDaemon);
-		}else
+
+			this.aplicarGenerarInforme();
+		} else
 			throw new EmptyStackException();
 	}
 
-	private void aplicarGenerarInforme(boolean esDaemon) throws IOException {
+	public void ejecutar(String fullPath, String path) {
+
+		DescomprimidorArchivosZip descomprimidor = new DescomprimidorArchivosZip(
+				path, path.concat(this.pathTemporal));
+
+		try {
+			descomprimidor.setPathZip(fullPath);
+			descomprimidor.descomprimirArchivosZip();
+			this.aplicarGenerarInforme();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
+	}
+
+	private void aplicarGenerarInforme() throws IOException {
 		GeneradorDeInforme generador = new GeneradorDeInforme(
 				this.buscarArchivos(this.path.concat(this.pathTemporal), "csv"),
 				this.pathSalidaDeInforme, this.contadorDeArchivos);
-		generador.generarInforme(esDaemon);
+		generador.generarInforme();
 		this.contadorDeArchivos = generador.getContadorDeArchivos();
-this.borrarArchivos();
+		this.borrarArchivos();
 
 	}
 
 	private List<String> buscarArchivos(String path, String tipoDeArchivoABuscar) {
 
-		BuscadorDeArchivos buscador = new BuscadorDeArchivos(path,tipoDeArchivoABuscar);
+		BuscadorDeArchivos buscador = new BuscadorDeArchivos(path,
+				tipoDeArchivoABuscar);
 		return buscador.getListaArchivosEnDirectorio();
 
 	}
@@ -71,5 +86,5 @@ this.borrarArchivos();
 		}
 
 	}
-	
+
 }
