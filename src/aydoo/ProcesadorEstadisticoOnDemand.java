@@ -1,7 +1,5 @@
 package aydoo;
 
-
-
 public class ProcesadorEstadisticoOnDemand implements ProcesadorEstadistico {
 
 	private String pathEntrada;

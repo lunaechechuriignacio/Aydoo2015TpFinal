@@ -15,13 +15,9 @@ public class GeneradorDeInforme {
 	private String nombreArchivoSalida = "Salida";
 	private int valorMinimoBicicleta, valorMaximoBicicleta;
 	private float tiempoPromedio;
-	// private float tiempoTotalDeUso;
-	// private int contadorDeViajes;
-
 	private int contadorDeArchivos;
 
-	public GeneradorDeInforme(List<String> listaArchivos, String pathSalida,
-			int contadorDeArchivos) {
+	public GeneradorDeInforme(List<String> listaArchivos, String pathSalida,int contadorDeArchivos) {
 		this.mapaBicicleta = new HashMap<Bicicleta, Integer>();
 		this.mapaRecorrido = new HashMap<Recorrido, Integer>();
 		this.listaArchivos = listaArchivos;
@@ -44,8 +40,7 @@ public class GeneradorDeInforme {
 			while (iteradorLista.hasNext()) {
 
 				pathArchivo = iteradorLista.next();
-				manejoDeArchivo = new ManejoDeArchivo(pathArchivo,
-						this.mapaBicicleta, this.mapaRecorrido);
+				manejoDeArchivo = new ManejoDeArchivo(pathArchivo,this.mapaBicicleta, this.mapaRecorrido);
 				manejoDeArchivo.leerArchivoCsv();
 				this.mapaBicicleta = manejoDeArchivo.getMapaBicicleta();
 				this.mapaRecorrido = manejoDeArchivo.getMapaRecorrido();

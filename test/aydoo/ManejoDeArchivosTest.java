@@ -2,7 +2,6 @@ package aydoo;
 
 import java.io.IOException;
 import java.util.HashMap;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -47,11 +46,9 @@ public class ManejoDeArchivosTest {
 
 			e.printStackTrace();
 		}
-
 		Assert.assertEquals(mda.getMapaRecorrido().size(), 0);
 		Assert.assertEquals(mda.getMapaRecorrido().size(), 0);
 		Assert.assertEquals(mda.getMapaBicicleta().size(), 0);
-
 	}
 
 }

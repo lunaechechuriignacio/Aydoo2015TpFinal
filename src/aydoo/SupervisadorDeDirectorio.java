@@ -39,23 +39,27 @@ public class SupervisadorDeDirectorio {
 	public void correrSupervisadorDeDirectorio(int ciclo) {
 		this.crearEventoWatch();
 		try {
-			WatchKey key = null;
-			while (ciclo > 0) {
-				ciclo--;
-
-				key = servicio.poll(10, TimeUnit.SECONDS);
-				
-				if (key != null) {
-					Thread.sleep(3000);
-					this.ejecutarEvento(key);
-
-					if (!key.reset()) {
-						break;
-					}
-				}
-			}
+			this.supervisarDirectorio(ciclo);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+	}
+
+	private void supervisarDirectorio(int ciclo) throws InterruptedException {
+		WatchKey key = null;
+		while (ciclo > 0) {
+			ciclo--;
+
+			key = servicio.poll(10, TimeUnit.SECONDS);
+			
+			if (key != null) {
+				Thread.sleep(3000);
+				this.ejecutarEvento(key);
+
+				if (!key.reset()) {
+					break;
+				}
+			}
 		}
 	}
 

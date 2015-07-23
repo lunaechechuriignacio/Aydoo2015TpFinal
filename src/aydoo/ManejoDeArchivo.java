@@ -118,15 +118,11 @@ public class ManejoDeArchivo {
 				
 					mapa.getKey().setTiempoDeUso(tiempoDeUso);
 					this.mapaRecorrido.put(mapa.getKey(), contador);	
-				}
-				
-			}
-
-			
+				}		
+			}			
 		} else
 
 			this.mapaRecorrido.put(recorrido, 1);
-
 	}
 
 	public HashMap<Bicicleta, Integer> getMapaBicicleta() {

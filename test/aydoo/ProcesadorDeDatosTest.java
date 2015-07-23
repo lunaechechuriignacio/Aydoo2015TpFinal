@@ -13,8 +13,7 @@ public class ProcesadorDeDatosTest {
 		String pathSalidaDeInforme="salida/";
 		String pathEntradaDeInforme="entradas_tests/";
 		this.borrarArchivos(pathSalidaDeInforme);
-	
-		
+			
 		try {
 			ProcesadorDeDatos procesador = new ProcesadorDeDatos();
 			procesador.generarInforme(pathEntradaDeInforme, pathSalidaDeInforme);
@@ -32,8 +31,7 @@ public class ProcesadorDeDatosTest {
 		String pathEntradaDeInforme="entradas_tests/";
 		String fullPath="entradas_tests/recorridos-2010.zip";
 		
-		this.borrarArchivos(pathSalidaDeInforme);
-		
+		this.borrarArchivos(pathSalidaDeInforme);	
 		
 		try {
 			ProcesadorDeDatos procesador = new ProcesadorDeDatos();
